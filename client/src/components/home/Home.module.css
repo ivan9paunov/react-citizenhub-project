@@ -1,0 +1,13 @@
+.contactUsContainer {
+    background-color: #FB5B21;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Full viewport height */
+    text-align: center;
+    font-size: 20px; /* Adjust as needed */
+    border-radius: 5px; /* Adjust the value for more or less rounding */
+    padding: 20px; /* Optional: Add padding to prevent text from touching the edges */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  }
