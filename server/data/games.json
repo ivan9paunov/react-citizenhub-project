@@ -1,0 +1,26 @@
+{
+    "52cc758c-e8d9-4358-b69a-612abef3475d": {
+        "title": "Satisfactory",
+        "category": "Automation",
+        "maxLevel": "10",
+        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/capsule_616x353.jpg?t=1718088881",
+        "summary": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+        "_id": "52cc758c-e8d9-4358-b69a-612abef3475d"
+    },
+    "458e2cc0-4580-491c-aaa0-dbb08e0ef816": {
+        "title": "EVE Online",
+        "category": "Space Simulator",
+        "maxLevel": "11",
+        "imageUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8500/header.jpg?t=1719480994",
+        "summary": "EVE Online is a free-to-play community driven space MMO where players can choose their own path from countless different options. Experience space exploration, immense PvP and PvE battles, mining, industry and a thriving player economy in an ever-expanding sandbox.",
+        "_id": "458e2cc0-4580-491c-aaa0-dbb08e0ef816"
+    },
+    "4a636aa6-c993-48ec-9cdb-aa02df56dd72": {
+        "title": "World of Warcraft",
+        "category": "MMO RPG",
+        "maxLevel": "9",
+        "imageUrl": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/world-of-warcraft/1/11/WoW_Logo.png",
+        "summary": "Prepare to descend beneath the surface of Azeroth to explore subterranean worlds full of hidden wonders, earn the trust of the new Earthen allied race, and face an ancient evil lurking in the darkness.",
+        "_id": "4a636aa6-c993-48ec-9cdb-aa02df56dd72"
+    }
+}
