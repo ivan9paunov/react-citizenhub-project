@@ -63,10 +63,10 @@
         "_id": "23285b09-855f-4bb4-a0af-d42648eb89ec"
     },
     "663c8231-1855-418d-ba40-cdea3e5663e8": {
-        "title": "The road is under water",
+        "title": "Pipe problem",
         "description": "I just noticed significant flooding on the road in front of the Gallery Hotel due to an underground pipe problem. This needs urgent attention to prevent further disruption and potential damage.",
         "location": "Gallery hotel",
-        "imageUrl": "/img/flooding-road.jpg",
+        "imageUrl": "/img/water-leak.jpeg",
         "createdAt": "23/07/2024, 14:37:39",
         "author": "alonso",
         "_id": "663c8231-1855-418d-ba40-cdea3e5663e8"
@@ -75,7 +75,7 @@
         "title": "Lost dog",
         "description": "This afternoon, I found a lost puppy with a strap wandering around. It's clear that the puppy has an owner who might be looking for it. If this is your puppy, please contact me at 0882461831 to arrange for its return.",
         "location": "Downtown",
-        "imageUrl": "/img/lost-pet.jpg",
+        "imageUrl": "/img/lost-pet.jpeg",
         "createdAt": "23/07/2024, 15:00:17",
         "author": "dayana",
         "_id": "a4948e93-e8e8-4a5d-a2cc-3917c4b0b8c3"
