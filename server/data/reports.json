@@ -1,0 +1,110 @@
+{
+    "4c8f1cb8-59e0-4bca-9757-4fc39c0e5305": {
+        "title": "Big Plane tree has fallen",
+        "description": "This morning, I noticed a large tree has fallen on Vasil Petrovich street. It's blocking part of the road, making it difficult for vehicles to pass and posing a safety hazard. This needs to be cleared as soon as possible to ensure safe passage for everyone.",
+        "location": "Vasil Petrovich st.",
+        "imageUrl": "/img/fallen-tree.jpg",
+        "createdAt": "22/07/2024, 09:53:06",
+        "author": "chris_wood",
+        "_id": "4c8f1cb8-59e0-4bca-9757-4fc39c0e5305"
+    },
+    "4712766c-85d7-4a06-a988-ef619b9163cd": {
+        "title": "Dangerous parking",
+        "description": "A car is parked right on the corner in front of the grocery store. The visibility is extremely low, making it dangerous for other drivers and pedestrians. This needs to be addressed quickly to prevent any potential accidents.",
+        "location": "Hristo Botev & Anton Ivanov",
+        "imageUrl": "/img/no-parking.png",
+        "createdAt": "22/07/2024, 11:30:48",
+        "author": "pesho",
+        "_id": "4712766c-85d7-4a06-a988-ef619b9163cd"
+    },
+    "90446eff-c420-4a7a-bb6a-7123bc06dfe3": {
+        "title": "Broken swing set",
+        "description": "This morning, I noticed that the swing set at the children's playground is broken. One of the chains is completely detached, making it unsafe for kids to use. This needs to be fixed as soon as possible to ensure the safety of the children playing there.",
+        "location": "The playground next to the post office",
+        "imageUrl": "/img/childrens-playground.jpg",
+        "createdAt": "22/07/2024, 12:39:44",
+        "author": "mata_hari",
+        "_id": "90446eff-c420-4a7a-bb6a-7123bc06dfe3"
+    },
+    "8da40a27-94a3-4624-98a7-4266a9b8e142": {
+        "title": "Illegal dumping",
+        "description": "Today, I noticed a large pile of garbage illegally dumped in Park Momina Banya. The trash is scattered all over, creating an eyesore and posing a health hazard to visitors. This needs immediate attention to keep our park clean and safe for everyone.",
+        "location": "Park Momina Salza",
+        "imageUrl": "/img/illegal-dumping.JPG",
+        "createdAt": "22/07/2024, 15:44:23",
+        "author": "pesho",
+        "_id": "8da40a27-94a3-4624-98a7-4266a9b8e142"
+    },
+    "329c2344-365f-4a24-b123-b25bb944906e": {
+        "title": "Public lighting problem",
+        "description": "I just noticed that the streetlight in front of my house is not working. The entire area is pitch dark, making it difficult and unsafe for pedestrians and drivers. This needs urgent attention to ensure the safety of the residents.",
+        "location": "Rozova dolina 7",
+        "imageUrl": "https://www.epelectric.com/files/html/Street-light-repair-1-.jpg",
+        "createdAt": "22/07/2024, 22:39:03",
+        "author": "ivan",
+        "_id": "329c2344-365f-4a24-b123-b25bb944906e"
+    },
+    "e1c0d4ea-0d23-4e71-af62-97b4a45253ab": {
+        "title": "Flooding road",
+        "description": "Due to last night's storm, there's significant flooding on the road. The shaft is blocked, causing water to accumulate over it. This situation needs urgent attention to prevent further disruption and ensure safe passage for vehicles and pedestrians.",
+        "location": "Orpheus restaurant",
+        "imageUrl": "/img/flooding-road.jfif",
+        "createdAt": "23/07/2024, 07:44:57",
+        "author": "tachkata",
+        "_id": "e1c0d4ea-0d23-4e71-af62-97b4a45253ab"
+    },
+    "23285b09-855f-4bb4-a0af-d42648eb89ec": {
+        "title": "Broken bench",
+        "description": "This morning, I noticed that a bench outside the stadium has been vandalized and is broken. The damage makes it unusable and creates an eyesore for the area. This needs to be repaired or replaced to maintain the appearance and functionality of the public space.",
+        "location": "Outside the stadium",
+        "imageUrl": "/img/vandalism.jpg",
+        "createdAt": "23/07/2024, 10:11:12",
+        "author": "ivan",
+        "_id": "23285b09-855f-4bb4-a0af-d42648eb89ec"
+    },
+    "663c8231-1855-418d-ba40-cdea3e5663e8": {
+        "title": "The road is under water",
+        "description": "I just noticed significant flooding on the road in front of the Gallery Hotel due to an underground pipe problem. This needs urgent attention to prevent further disruption and potential damage.",
+        "location": "Gallery hotel",
+        "imageUrl": "/img/flooding-road.jpg",
+        "createdAt": "23/07/2024, 14:37:39",
+        "author": "alonso",
+        "_id": "663c8231-1855-418d-ba40-cdea3e5663e8"
+    },
+    "a4948e93-e8e8-4a5d-a2cc-3917c4b0b8c3": {
+        "title": "Lost dog",
+        "description": "This afternoon, I found a lost puppy with a strap wandering around. It's clear that the puppy has an owner who might be looking for it. If this is your puppy, please contact me at 0882461831 to arrange for its return.",
+        "location": "Downtown",
+        "imageUrl": "/img/lost-pet.jpg",
+        "createdAt": "23/07/2024, 15:00:17",
+        "author": "dayana",
+        "_id": "a4948e93-e8e8-4a5d-a2cc-3917c4b0b8c3"
+    },
+    "2745b7a2-b52d-4d24-b4ee-69a12f67a4e6": {
+        "title": "Overloaded bins",
+        "description": "The public bins at Hotel Hissar are overloaded, causing trash to spill onto the road. Stray dogs are spreading the garbage everywhere, creating a mess and a potential health hazard. This situation needs immediate attention to keep the area clean and safe.",
+        "location": "Hotel Hissar",
+        "imageUrl": "/img/public-bin.jpeg",
+        "createdAt": "23/07/2024, 16:05:22",
+        "author": "ivan",
+        "_id": "2745b7a2-b52d-4d24-b4ee-69a12f67a4e6"
+    },
+    "0713a44e-9d2a-473d-a680-7820e468d236": {
+        "title": "Huge crater",
+        "description": "There is a very big hole on Vasil Levski Street that needs urgent road maintenance. The hole poses a significant danger to drivers and it needs to be repaired as soon as possible to ensure safety.",
+        "location": "Vasil Levski",
+        "imageUrl": "/img/road-maintenance.jpg",
+        "createdAt": "23/07/2024, 17:11:38",
+        "author": "tachkata",
+        "_id": "0713a44e-9d2a-473d-a680-7820e468d236"
+    },
+    "6f349bf6-a927-489f-8fdf-6296aee76b65": {
+        "title": "Lost keys",
+        "description": "This evening, I found a set of keys left on the bench in front of the community center. They seem to have been forgotten by someone, and I’m concerned the owner might be looking for them. If these are your keys, please contact me at 0873489212 to arrange for their return.",
+        "location": "In front of the Community center",
+        "imageUrl": "/img/lost-belongings.jpg",
+        "createdAt": "23/07/2024, 21:53:42",
+        "author": "pepa",
+        "_id": "6f349bf6-a927-489f-8fdf-6296aee76b65"
+    }
+}
