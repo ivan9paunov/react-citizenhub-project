@@ -13,7 +13,7 @@ export default function ReportListItem({
                     <img className="img-fluid w-100" src={imageUrl} alt="" />
                     <div className="team-overlay">
                         <div className="d-flex align-items-center justify-content-start">
-                            <Link className="btn btn-light mx-1" to="#">Details</Link>
+                            <Link className="btn btn-light mx-1" to={`/reports/${_id}/details`}>Details</Link>
                         </div>
                     </div>
                 </div>
