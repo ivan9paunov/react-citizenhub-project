@@ -21,7 +21,7 @@ export default function Home() {
                         <div className={styles.contactUsContainer}>CONTACT US</div>
                         <div className="tab-content">
                             <div className="tab-pane fade show active" id="pills-1">
-                                <p className="text-secondary text-center my-3">Address: General Gurko №14, Hisarya, 4180, Bulgaria</p>
+                                <p className="text-secondary text-center my-3"><span className="text-light fw-bold">Address: </span>General Gurko №14, Hisarya, 4180, Bulgaria</p>
                                 <GoogleMaps />
                             </div>
                         </div>

@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import reportsAPI from "../../api/reports-api.js";
 import commentsApi from "../../api/comments-api.js";
+import { useGetOneReport } from "../../hooks/useReports.js";
 
 export default function ReportDetails() {
-    const [report, setReport] = useState({});
-    const [comment, setComment] = useState('');
     const { reportId } = useParams();
+    const [report, setReport] = useGetOneReport(reportId);
+    const [comment, setComment] = useState('');
 
-    useEffect(() => {
-        (async () => {
-            const result = await reportsAPI.getOne(reportId);
-
-            setReport(result);
-        })();
-    }, []);
+    
 
     const commentSubmitHandler = async (e) => {
         e.preventDefault();
@@ -75,7 +69,13 @@ export default function ReportDetails() {
 
             {/* // <!-- Comment List Start --> */}
             <div className="col-lg-6 mx-auto mb-5">
-                <h3 className="text-uppercase mb-4 text-center">{report.comments ? Object.values(report.comments).length : 0} Comments</h3>
+                <h3 className="text-uppercase mb-4 text-center">
+                    {report.comments
+                        ? Object.values(report.comments).length == 1
+                            ? `${Object.values(report.comments).length} COMMENT`
+                            : `${Object.values(report.comments).length} COMMENTS`
+                        : `0 COMMENTS`}
+                </h3>
                 {report.comments && Object.values(report.comments).map(comment => (
                     <div key={comment._id} className="d-flex mb-4">
                         <div>

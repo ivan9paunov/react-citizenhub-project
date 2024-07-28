@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/footer/Footer.jsx";
+
 import Header from "./components/header/Header.jsx";
+import Footer from "./components/footer/Footer.jsx";
 import Home from "./components/home/Home.jsx";
 import ReportList from "./components/report-list/ReportList.jsx";
 import ReportDetails from "./components/report-details/ReportDetails.jsx";
@@ -8,10 +10,25 @@ import ArchiveList from "./components/archive-list/ArchiveList.jsx";
 import NewReport from "./components/new-report/NewReport.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
+import { AuthContext } from "./contexts/AuthContext.js";
 
 function App() {
+    const [authState, setAuthState] = useState({});
+
+    const changeAuthState =(state) => {
+        setAuthState(state);
+    };
+
+    const contextData = {
+        username: authState.username,
+        email: authState.email,
+        accessToken: authState.accessToken,
+        isAuthenticated: !!authState.email,
+        changeAuthState
+    };
+
     return (
-        <>
+        <AuthContext.Provider value={contextData}>
             <Header />
 
             <Routes>
@@ -25,7 +42,7 @@ function App() {
             </Routes>
 
             <Footer />
-        </>
+        </AuthContext.Provider>
     );
 }
 

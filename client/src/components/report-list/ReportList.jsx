@@ -1,26 +1,10 @@
-import { useEffect, useState } from "react";
-import reportsAPI from "../../api/reports-api.js";
 import ReportListItem from "./report-list-item/ReportListItem.jsx";
 import Spinner from "../spinner/Spinner.jsx";
+import { useGetAllReports } from "../../hooks/useReports.js";
 
 
 export default function ReportList() {
-    const [reports, setReports] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const result = await reportsAPI.getAll();
-    
-                setReports(result);
-            } catch (error) {
-                alert(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        })();
-    }, []);
+    const { reports, isLoading } = useGetAllReports();
 
     return (
         <div className="container-fluid p-5">
