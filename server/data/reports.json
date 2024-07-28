@@ -6,7 +6,13 @@
         "imageUrl": "/img/fallen-tree.jpg",
         "createdAt": "22/07/2024, 09:53:06",
         "author": "chris_wood",
-        "_id": "4c8f1cb8-59e0-4bca-9757-4fc39c0e5305"
+        "_id": "4c8f1cb8-59e0-4bca-9757-4fc39c0e5305",
+        "comments": {
+            "92e02166-b960-4e7f-8ac6-87cfb5334a0f": {
+                "comment": "It's still there",
+                "_id": "92e02166-b960-4e7f-8ac6-87cfb5334a0f"
+            }
+        }
     },
     "4712766c-85d7-4a06-a988-ef619b9163cd": {
         "title": "Dangerous parking",
