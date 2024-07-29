@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 export default function Header() {
+    const { isAuthenticated } = useContext(AuthContext);
+
     return (
         <div className="container-fluid bg-dark px-0">
             <div className="row gx-0">
@@ -53,10 +57,21 @@ export default function Header() {
                                 <Link to="/" className="nav-item nav-link active">Home</Link>
                                 <Link to="/reports" className="nav-item nav-link">Reports</Link>
                                 <Link to="/archived" className="nav-item nav-link">Archived</Link>
-                                <Link to="/report-it" className="nav-item nav-link">Report It</Link>
-                                <Link to="/logout" className="nav-item nav-link">Logout</Link>
-                                <Link to="/login" className="nav-item nav-link">Login</Link>
-                                <Link to="/register" className="nav-item nav-link">Register</Link>
+                                {isAuthenticated
+                                    ? (
+                                        <>
+                                            <Link to="/report-it" className="nav-item nav-link">Report It</Link>
+                                            <Link to="/logout" className="nav-item nav-link">Logout</Link>
+                                        </>
+                                    )
+                                    : (
+                                        <>
+                                            <Link to="/login" className="nav-item nav-link">Login</Link>
+                                            <Link to="/register" className="nav-item nav-link">Register</Link>
+                                        </>
+                                    )
+
+                                }
                             </div>
                             <Link to="https://hisarya.bg/" className="btn btn-primary py-md-3 px-md-5 d-none d-lg-block" target="_blank">Official Website</Link>
                         </div>
