@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useCreateReport } from "../../hooks/useReports.js";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +14,11 @@ const initialValues = {
 export default function NewReport() {
     const navigate = useNavigate();
     const createReport = useCreateReport();
+    const {username} = useContext(AuthContext);
 
     const createHandler = async (values) => {
         try {
-            const {_id: reportId} = await createReport(values);
+            const { _id: reportId } = await createReport({...values, author: username});
             navigate(`/reports/${reportId}/details`);
         } catch (err) {
             // TODO: Set error state and display error

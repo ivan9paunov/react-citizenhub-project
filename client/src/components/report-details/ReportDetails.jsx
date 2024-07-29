@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import commentsApi from "../../api/comments-api.js";
 import { useGetOneReport } from "../../hooks/useReports.js";
+import { formatDate } from "../../utils/dateUtils.js";
 
 export default function ReportDetails() {
     const { reportId } = useParams();
@@ -45,7 +47,7 @@ export default function ReportDetails() {
                                 <div className="d-flex align-items-center">
                                     <div className="ps-0">
                                         <h5 className="text-uppercase text-light">{`Location: ${report.location}`}</h5>
-                                        <span className="text-uppercase text-secondary">{report.createdAt}</span>
+                                        <span className="text-uppercase text-secondary">{formatDate(report._createdOn)}</span>
                                     </div>
                                 </div>
                                 <div className="nav nav-pills justify-content-between mt-5 mb-3">
