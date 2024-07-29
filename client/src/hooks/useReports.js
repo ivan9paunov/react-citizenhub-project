@@ -23,7 +23,7 @@ export function useGetAllReports() {
         reports,
         isLoading
     }
-}
+};
 
 export function useGetOneReport(reportId) {
     const [report, setReport] = useState({});
@@ -40,4 +40,10 @@ export function useGetOneReport(reportId) {
         report,
         setReport
     ];
+};
+
+export function useCreateReport() {
+    const reportCreateHandler = (reportData) => reportsAPI.create(reportData);
+
+    return reportCreateHandler;
 }

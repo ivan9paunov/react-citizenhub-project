@@ -1,8 +1,8 @@
 import * as request from './requester.js';
 
-const BASE_URL = 'http://localhost:3030/jsonstore/reports';
+const BASE_URL = 'http://localhost:3030/data/reports';
 
-export const getAll = async () => {
+const getAll = async () => {
     const result = await request.get(BASE_URL);
 
     const reports = Object.values(result);
@@ -10,11 +10,14 @@ export const getAll = async () => {
     return reports;
 };
 
-export const getOne = (reportId) => request.get(`${BASE_URL}/${reportId}`);
+const getOne = (reportId) => request.get(`${BASE_URL}/${reportId}`);
+
+const create = (reportData) => request.post(`${BASE_URL}`, reportData);
 
 const reportsAPI = {
     getAll,
-    getOne
+    getOne,
+    create
 };
 
 export default reportsAPI;

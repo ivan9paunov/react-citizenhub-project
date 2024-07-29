@@ -4,13 +4,13 @@ export default function ReportListItem({
     _id,
     title,
     location,
-    imageUrl
+    topic
 }) {
     return (
         <div className="col-lg-4 col-md-6">
             <div className="team-item position-relative">
                 <div className="position-relative overflow-hidden rounded">
-                    <img className="img-fluid w-100" src={imageUrl} alt="" />
+                    <img className="img-fluid w-100" src={topic} alt="" />
                     <div className="team-overlay">
                         <div className="d-flex align-items-center justify-content-start">
                             <Link className="btn btn-light mx-1" to={`/reports/${_id}/details`}>Details</Link>

@@ -8,8 +8,6 @@ export default function ReportDetails() {
     const [report, setReport] = useGetOneReport(reportId);
     const [comment, setComment] = useState('');
 
-    
-
     const commentSubmitHandler = async (e) => {
         e.preventDefault();
 
@@ -32,7 +30,7 @@ export default function ReportDetails() {
                 <div className="row g-0">
                     <div className="col-lg-3" style={{ minHeight: "500px" }}>
                         <div className="position-relative h-100">
-                            <img className="position-absolute w-100 h-100" src={report.imageUrl} style={{ objectFit: "cover" }} />
+                            <img className="position-absolute w-100 h-100" src={`/${report.topic}`} style={{ objectFit: "cover" }} />
                         </div>
                     </div>
                     <div className="col-lg-9 bg-dark p-5">

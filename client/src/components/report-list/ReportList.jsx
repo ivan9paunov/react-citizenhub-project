@@ -5,7 +5,7 @@ import { useGetAllReports } from "../../hooks/useReports.js";
 
 export default function ReportList() {
     const { reports, isLoading } = useGetAllReports();
-
+    
     return (
         <div className="container-fluid p-5">
             <div className="mb-5 text-center">

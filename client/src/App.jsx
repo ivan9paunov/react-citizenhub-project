@@ -15,7 +15,8 @@ import { AuthContext } from "./contexts/AuthContext.js";
 function App() {
     const [authState, setAuthState] = useState({});
 
-    const changeAuthState =(state) => {
+    const changeAuthState = (state) => {
+        localStorage.setItem('accessToken', state.accessToken);
         setAuthState(state);
     };
 
