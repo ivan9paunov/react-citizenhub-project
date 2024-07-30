@@ -5,7 +5,7 @@ export const formatDate = (timestamp) => {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const hours = date.getHours();
-    const minutes = date.getMinutes();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
 
     const formattedDate = `${day}/${month}/${year}, ${hours}:${minutes}`;
 
