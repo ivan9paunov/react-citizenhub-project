@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 
 export default function Header() {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated } = useAuthContext();
 
     return (
         <div className="container-fluid bg-dark px-0">
