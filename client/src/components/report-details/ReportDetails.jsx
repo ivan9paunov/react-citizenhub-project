@@ -43,7 +43,7 @@ export default function ReportDetails() {
                         </div>
                         <div>
                             <div className="testimonial-item">
-                                <p className="fs-4 fw-normal text-light mb-4"><i className="fa fa-quote-left text-primary me-3"></i>{report.description}</p>
+                                <p className="fs-4 fw-normal text-light mb-4" style={{textAlign: "justify"}}><i className="fa fa-quote-left text-primary me-3"></i>{report.description}</p>
                                 <div className="d-flex align-items-center">
                                     <div className="ps-0">
                                         <h5 className="text-uppercase text-light">{`Location: ${report.location}`}</h5>
@@ -77,11 +77,11 @@ export default function ReportDetails() {
                         : `0 COMMENTS`}
                 </h3>
                 {report.comments && Object.values(report.comments).map(comment => (
-                    <div key={comment._id} className="d-flex mb-4">
-                        <div>
+                    <div key={comment._id} className="bg-secondary d-flex mb-4 rounded">
+                        <div className="p-3">
                             <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>{comment.comment}</p>
-                            <button className="btn btn-sm btn-secondary">Reply</button>
+                            <p style={{color: "black"}}>{comment.comment}</p>
+                            <button className="btn btn-sm btn-primary">Like</button>
                         </div>
                     </div>
                 ))}
