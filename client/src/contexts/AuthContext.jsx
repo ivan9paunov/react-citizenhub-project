@@ -8,6 +8,7 @@ export const AuthContext = createContext({
     email: '',
     accessToken: '',
     isAuthenticated: false,
+    isAdmin: false,
     changeAuthState: (authState = {}) => null,
     logout: () => null
 });
@@ -29,6 +30,7 @@ export function AuthContextProvider(props) {
         email: authState?.email,
         accessToken: authState?.accessToken,
         isAuthenticated: !!authState?.email,
+        isAdmin: authState?.isAdmin,
         changeAuthState,
         logout
     };
