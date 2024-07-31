@@ -13,6 +13,8 @@ function commentsReducer(state, action) {
             return action.payload.slice();
         case "ADD_COMMENT":
             return [...state, action.payload];
+        case "DELETE_COMMENT":
+            return state.filter((c) => c._id != action.payload);
         default: return state;
     }
 };
@@ -26,7 +28,7 @@ export function useGetAllComments(reportId) {
 
             dispatch({ type: 'GET_ALL', payload: result });
         })();
-    }, [reportId, comments]);
+    }, [reportId]);
 
     return [comments, dispatch];
 }

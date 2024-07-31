@@ -43,6 +43,8 @@ export default function ReportDetails() {
         const commentId = e.target.dataset.id;
         try {
             await commentsApi.remove(commentId);
+
+            dispatch({ type: 'DELETE_COMMENT', payload: commentId });
         } catch (err) {
             console.log(err.message);
         }
