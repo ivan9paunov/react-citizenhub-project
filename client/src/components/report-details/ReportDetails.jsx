@@ -4,27 +4,30 @@ import { Link, useParams } from "react-router-dom";
 import commentsApi from "../../api/comments-api.js";
 import { useGetOneReport } from "../../hooks/useReports.js";
 import { formatDate } from "../../utils/dateUtils.js";
+import { useForm } from "../../hooks/useForm.js";
+import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useCreateComment, useGetAllComments } from "../../hooks/useComments.js";
+
+const initialValues = {
+    comment: ''
+};
 
 export default function ReportDetails() {
     const { reportId } = useParams();
-    const [report, setReport] = useGetOneReport(reportId);
-    const [comment, setComment] = useState('');
+    const [comments, dispatch] = useGetAllComments(reportId);
+    const createComment = useCreateComment();
+    const [report] = useGetOneReport(reportId);
+    const { isAuthenticated, userId, username } = useAuthContext();
 
-    const commentSubmitHandler = async (e) => {
-        e.preventDefault();
+    const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
+        try {
+            const newComment = await createComment(reportId, comment, username);
 
-        const newComment = await commentsApi.create(reportId, comment);
-
-        setReport(prevState => ({
-            ...prevState,
-            comments: {
-                ...prevState.comments,
-                [newComment._id]: newComment
-            }
-        }));
-
-        setComment('');
-    };
+            dispatch({ type: 'ADD_COMMENT', payload: newComment });
+        } catch (err) {
+            console.log(err.message);
+        }
+    });
 
     return (
         <>
@@ -43,7 +46,7 @@ export default function ReportDetails() {
                         </div>
                         <div>
                             <div className="testimonial-item">
-                                <p className="fs-4 fw-normal text-light mb-4" style={{textAlign: "justify"}}><i className="fa fa-quote-left text-primary me-3"></i>{report.description}</p>
+                                <p className="fs-4 fw-normal text-light mb-4" style={{ textAlign: "justify" }}><i className="fa fa-quote-left text-primary me-3"></i>{report.description}</p>
                                 <div className="d-flex align-items-center">
                                     <div className="ps-0">
                                         <h5 className="text-uppercase text-light">{`Location: ${report.location}`}</h5>
@@ -70,17 +73,17 @@ export default function ReportDetails() {
             {/* // <!-- Comment List Start --> */}
             <div className="col-lg-6 mx-auto mb-5">
                 <h3 className="text-uppercase mb-4 text-center">
-                    {report.comments
-                        ? Object.values(report.comments).length == 1
-                            ? `${Object.values(report.comments).length} COMMENT`
-                            : `${Object.values(report.comments).length} COMMENTS`
+                    {comments.length > 0
+                        ? comments.length == 1
+                            ? "1 COMMENT"
+                            : `${comments.length} COMMENTS`
                         : `0 COMMENTS`}
                 </h3>
-                {report.comments && Object.values(report.comments).map(comment => (
+                {comments.map(comment => (
                     <div key={comment._id} className="bg-secondary d-flex mb-4 rounded">
                         <div className="p-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p style={{color: "black"}}>{comment.comment}</p>
+                            <h6><a href="">{comment.author.username}</a> <small><i>{formatDate(comment._createdOn)}</i></small></h6>
+                            <p style={{ color: "black" }}>{comment.comment}</p>
                             <button className="btn btn-sm btn-primary">Like</button>
                         </div>
                     </div>
@@ -89,25 +92,28 @@ export default function ReportDetails() {
             {/* <!-- Comment List End --> */}
 
             {/* <!-- Comment Form Start --> */}
-            <div className="col-lg-6 mx-auto mb-5 bg-dark rounded p-5">
-                <h3 className="text-light text-uppercase mb-4">Leave a comment</h3>
-                <form onSubmit={commentSubmitHandler}>
-                    <div className="row g-3">
-                        <div className="col-12">
-                            <textarea
-                                className="form-control bg-white border-0"
-                                rows="5"
-                                placeholder="Comment"
-                                onChange={(e) => setComment(e.target.value)}
-                                value={comment}
-                            ></textarea>
+            {isAuthenticated && (
+                <div className="col-lg-6 mx-auto mb-5 bg-dark rounded p-5">
+                    <h3 className="text-light text-uppercase mb-4">Leave a comment</h3>
+                    <form onSubmit={submitHandler}>
+                        <div className="row g-3">
+                            <div className="col-12">
+                                <textarea
+                                    name="comment"
+                                    value={values.comment}
+                                    onChange={changeHandler}
+                                    className="form-control bg-white border-0"
+                                    rows="5"
+                                    placeholder="Comment"
+                                ></textarea>
+                            </div>
+                            <div className="col-12">
+                                <button className="btn btn-primary w-100 py-3" type="submit">Leave Your Comment</button>
+                            </div>
                         </div>
-                        <div className="col-12">
-                            <button className="btn btn-primary w-100 py-3" type="submit">Leave Your Comment</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+            )}
             {/* <!-- Comment Form End --> */}
         </>
     );

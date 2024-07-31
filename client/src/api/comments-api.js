@@ -1,18 +1,16 @@
 import requester from "./requester.js";
 
-const BASE_URL = 'http://localhost:3030/jsonstore/reports';
+const BASE_URL = 'http://localhost:3030/data/comments';
 
-const buildUrl = (reportId) => `${BASE_URL}/${reportId}/comments`;
+const create = (reportId, comment, username) => requester.post(BASE_URL, { reportId, comment, author: { username } });
 
-const create = (reportId, comment) => requester.post(buildUrl(reportId), { comment });
-;
+const getAll = (reportId) => {
+    const params = new URLSearchParams({
+        where: `reportId="${reportId}"`,
+        load: `author=_ownerId:users`
+    });
 
-const getAll = async (reportId) => {
-    const result = await requester.get(buildUrl(reportId));
-
-    const comments = Object.values(result);
-
-    return comments;
+    return requester.get(`${BASE_URL}?${params.toString()}`);
 };
 
 const commentsApi = {

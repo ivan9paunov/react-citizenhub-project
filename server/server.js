@@ -1457,30 +1457,12 @@
                 _id: "5ccd57d7-d6cc-438f-aeb5-38371c4558aa"
             },
             "e55b732a-d181-4ec7-a767-2381349ceb02": {
-                _ownerId: "c5fdb90e-1058-4a40-9c5c-bd9202b4de1c",
+                _ownerId: "6c631c55-58e6-4897-9995-8299f5ddc7d4",
                 topic: "img/fallen-tree.jpg",
                 title: "Big Plane tree has fallen",
                 location: "Vasil Petrovich St.",
                 description: "This morning, I noticed a large tree has fallen on Vasil Petrovich street. It's blocking part of the road, making it difficult for vehicles to pass and posing a safety hazard. This needs to be cleared as soon as possible to ensure safe passage for everyone.",
                 author: "chris_wood",
-                comments: {
-                    "92e02166-b960-4e7f-8ac6-87cfb5334a0f": {
-                        "comment": "It's still there",
-                        "_id": "92e02166-b960-4e7f-8ac6-87cfb5334a0f"
-                    },
-                    "e83d2bec-204e-4566-b1c7-1faea48059f7": {
-                        "comment": "Yes, it is!",
-                        "_id": "e83d2bec-204e-4566-b1c7-1faea48059f7"
-                    },
-                    "18159d59-8443-4240-88bf-e77856def636": {
-                        "comment": "Workers from the municipal enterprise are at the location and are currently cutting the tree. It should be removed within an hour.",
-                        "_id": "18159d59-8443-4240-88bf-e77856def636"
-                    },
-                    "979c620c-a3bf-4081-b77d-91b312dcc0b9": {
-                        "comment": "Now it's clear!",
-                        "_id": "979c620c-a3bf-4081-b77d-91b312dcc0b9"
-                    }
-                },
                 _createdOn: 1722329040969,
                 _id: "e55b732a-d181-4ec7-a767-2381349ceb02"
             }
@@ -1539,12 +1521,45 @@
             }
         },
         comments: {
-            "0a272c58-b7ea-4e09-a000-7ec988248f66": {
+            "25edb8aa-afa4-455e-8c28-0119afa2fbe2": {
+                _ownerId: "935f0fb7-a6fc-4084-99b0-b084a1ec87f1",
+                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
+                comment: "Is it still there?",
+                author: {
+                    username: "ivan"
+                },
+                _createdOn: 1722427261525,
+                _id: "25edb8aa-afa4-455e-8c28-0119afa2fbe2"
+            },
+            "a18b7822-68e3-49cd-bb01-7d504a053d5d": {
                 _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-                content: "Great recipe!",
-                recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-                _createdOn: 1614260681375,
-                _id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
+                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
+                comment: "Yes, it is!",
+                author: {
+                    username: "peter"
+                },
+                _createdOn: 1722427652470,
+                _id: "a18b7822-68e3-49cd-bb01-7d504a053d5d"
+            },
+            "2eb3fab9-fd01-47d3-952b-e07bd2536bf5": {
+                _ownerId: "6c631c55-58e6-4897-9995-8299f5ddc7d4",
+                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
+                comment: "Workers from the municipal enterprise are at the location and are currently cutting the tree. It should be removed within an hour.",
+                author: {
+                    username: "chris_wood"
+                },
+                _createdOn: 1722428022630,
+                _id: "2eb3fab9-fd01-47d3-952b-e07bd2536bf5"
+            },
+            "2a349371-163a-41ac-a4e1-6e09995efca6": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
+                comment: "It's clear now!",
+                author: {
+                    username: "george"
+                },
+                _createdOn: 1722432902972,
+                _id: "2a349371-163a-41ac-a4e1-6e09995efca6"
             }
         },
         likes: {
