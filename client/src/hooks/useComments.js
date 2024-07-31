@@ -26,7 +26,7 @@ export function useGetAllComments(reportId) {
 
             dispatch({ type: 'GET_ALL', payload: result });
         })();
-    }, [reportId]);
+    }, [reportId, comments]);
 
     return [comments, dispatch];
 }

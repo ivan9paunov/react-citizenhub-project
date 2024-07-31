@@ -14,10 +14,13 @@ const getOne = (reportId) => request.get(`${BASE_URL}/${reportId}`);
 
 const create = (reportData) => request.post(`${BASE_URL}`, reportData);
 
+const remove = (reportId) => request.del(`${BASE_URL}/${reportId}`);
+
 const reportsAPI = {
     getAll,
     getOne,
-    create
+    create,
+    remove
 };
 
 export default reportsAPI;

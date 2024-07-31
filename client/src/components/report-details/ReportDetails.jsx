@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import commentsApi from "../../api/comments-api.js";
 import { useGetOneReport } from "../../hooks/useReports.js";
 import { formatDate } from "../../utils/dateUtils.js";
 import { useForm } from "../../hooks/useForm.js";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useCreateComment, useGetAllComments } from "../../hooks/useComments.js";
+import reportsAPI from "../../api/reports-api.js";
+import commentsApi from "../../api/comments-api.js";
 
 const initialValues = {
     comment: ''
@@ -17,7 +17,8 @@ export default function ReportDetails() {
     const [comments, dispatch] = useGetAllComments(reportId);
     const createComment = useCreateComment();
     const [report] = useGetOneReport(reportId);
-    const { isAuthenticated, userId, username } = useAuthContext();
+    const { isAdmin, isAuthenticated, userId, username } = useAuthContext();
+    const navigate = useNavigate();
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
@@ -28,6 +29,26 @@ export default function ReportDetails() {
             console.log(err.message);
         }
     });
+
+    const reportDeleteHandler = async () => {
+        try {
+            await reportsAPI.remove(reportId);
+            navigate('/reports');
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+
+    const commentDeleteHandler = async (e) => {
+        const commentId = e.target.dataset.id;
+        try {
+            await commentsApi.remove(commentId);
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+
+    const isOwner = userId == report._ownerId;
 
     return (
         <>
@@ -53,17 +74,28 @@ export default function ReportDetails() {
                                         <span className="text-uppercase text-secondary">{formatDate(report._createdOn)}</span>
                                     </div>
                                 </div>
-                                <div className="nav nav-pills justify-content-between mt-5 mb-3">
-                                    <div className="col-lg-3">
-                                        <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-1">Edit</Link>
-                                    </div>
-                                    <div className="col-lg-3">
-                                        <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-2">Archive</Link>
-                                    </div>
-                                    <div className="col-lg-3">
-                                        <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-3">Delete</Link>
-                                    </div>
-                                </div>
+                                {isOwner || isAdmin
+                                    ? (
+                                        <div className="nav nav-pills justify-content-between mt-5 mb-3">
+                                            <div className="col-lg-3">
+                                                <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-1">Edit</Link>
+                                            </div>
+                                            <div className="col-lg-3">
+                                                <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-2">Archive</Link>
+                                            </div>
+                                            <div className="col-lg-3">
+                                                <Link onClick={reportDeleteHandler} className="nav-link text-uppercase text-center w-100 active" to="#pills-3">Delete</Link>
+                                            </div>
+                                        </div>
+                                    )
+                                    : (
+                                        <div className="nav nav-pills mt-5 mb-3">
+                                            <div className="col-lg-1">
+                                                <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-1">Like</Link>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
@@ -81,10 +113,16 @@ export default function ReportDetails() {
                 </h3>
                 {comments.map(comment => (
                     <div key={comment._id} className="bg-secondary d-flex mb-4 rounded">
-                        <div className="p-3">
-                            <h6><a href="">{comment.author.username}</a> <small><i>{formatDate(comment._createdOn)}</i></small></h6>
-                            <p style={{ color: "black" }}>{comment.comment}</p>
-                            <button className="btn btn-sm btn-primary">Like</button>
+                        <div className="container p-3">
+                            <div className="row d-flex justify-content-between">
+                                <div className="col-lg-3 bg-dark rounded" style={{textAlign: 'center'}}><h6 className="text-primary mt-1">{comment.author.username}{report._ownerId == comment._ownerId ? <span className="text-white"> (author)</span> : ""}</h6></div>
+                                <div className="col-lg-8" style={{ textAlign: "end" }}><h6><small><i>{formatDate(comment._createdOn)}</i></small></h6></div>
+                                {userId == comment._ownerId || isAdmin
+                                    ? <div className="col-lg-1" style={{ textAlign: "end" }}><button onClick={commentDeleteHandler} data-id={comment._id} className="btn btn-sm btn-primary">x</button></div>
+                                    : ''
+                                }
+                            </div>
+                            <p style={{ textAlign: 'center', color: "black", marginBottom: '0', marginTop: '10px' }}>{comment.comment}</p>
                         </div>
                     </div>
                 ))}

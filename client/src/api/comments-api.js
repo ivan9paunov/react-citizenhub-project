@@ -12,9 +12,12 @@ const getAll = (reportId) => {
     return requester.get(`${BASE_URL}?${params.toString()}`);
 };
 
+const remove = (commentId) => requester.del(`${BASE_URL}/${commentId}`);
+
 const commentsApi = {
     create,
-    getAll
+    getAll,
+    remove
 }
 
 export default commentsApi;
