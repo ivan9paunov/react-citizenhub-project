@@ -20,15 +20,15 @@ function commentsReducer(state, action) {
 };
 
 export function useGetAllComments(reportId) {
-    const [comments, dispatch] = useReducer(commentsReducer, []);
+    const [comments, dispatchComments] = useReducer(commentsReducer, []);
 
     useEffect(() => {
         (async () => {
             const result = await commentsAPI.getAll(reportId);
 
-            dispatch({ type: 'GET_ALL', payload: result });
+            dispatchComments({ type: 'GET_ALL', payload: result });
         })();
     }, [reportId]);
 
-    return [comments, dispatch];
+    return [comments, dispatchComments];
 }

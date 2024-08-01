@@ -7,6 +7,9 @@ import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useCreateComment, useGetAllComments } from "../../hooks/useComments.js";
 import reportsAPI from "../../api/reports-api.js";
 import commentsApi from "../../api/comments-api.js";
+import Like from "../likes/like/Like.jsx";
+import { useGetAllLikes } from "../../hooks/useLikes.js";
+import Dislike from "../likes/dislike/Dislike.jsx";
 
 const initialValues = {
     comment: ''
@@ -14,17 +17,18 @@ const initialValues = {
 
 export default function ReportDetails() {
     const { reportId } = useParams();
-    const [comments, dispatch] = useGetAllComments(reportId);
+    const [comments, dispatchComments] = useGetAllComments(reportId);
+    const [likes, dispatchLikes] = useGetAllLikes(reportId);
     const createComment = useCreateComment();
     const [report] = useGetOneReport(reportId);
     const { isAdmin, isAuthenticated, userId, username } = useAuthContext();
     const navigate = useNavigate();
-
+    
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
             const newComment = await createComment(reportId, comment);
 
-            dispatch({ type: 'ADD_COMMENT', payload: { ...newComment, author: { username } } });
+            dispatchComments({ type: 'ADD_COMMENT', payload: { ...newComment, author: { username } } });
         } catch (err) {
             console.log(err.message);
         }
@@ -44,13 +48,18 @@ export default function ReportDetails() {
         try {
             await commentsApi.remove(commentId);
 
-            dispatch({ type: 'DELETE_COMMENT', payload: commentId });
+            dispatchComments({ type: 'DELETE_COMMENT', payload: commentId });
         } catch (err) {
             console.log(err.message);
         }
     };
+    
+    const likeHandler = (newLike) => {
+        dispatchLikes({type: 'LIKE', payload: newLike});
+    };
 
     const isOwner = userId == report._ownerId;
+    const hasLiked = !!likes.find((l) => l._ownerId == userId);
 
     return (
         <>
@@ -64,7 +73,7 @@ export default function ReportDetails() {
                     <div className="col-lg-9 bg-dark p-5">
                         <div className="mb-5">
                             <h5 className="text-primary text-uppercase">{report.author}</h5>
-                            <h3 className="text-primary text-uppercase text-end"><i className="fa fa-heart"></i> 0</h3>
+                            <h3 className="text-primary text-uppercase text-end"><i className="fa fa-heart"></i> {likes.length}</h3>
                             <h1 className="display-3 text-uppercase text-light mb-0">{report.title}</h1>
                         </div>
                         <div>
@@ -86,14 +95,17 @@ export default function ReportDetails() {
                                                 <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-2">Archive</Link>
                                             </div>
                                             <div className="col-lg-3">
-                                                <Link onClick={reportDeleteHandler} className="nav-link text-uppercase text-center w-100 active" to="#pills-3">Delete</Link>
+                                                <Link onClick={reportDeleteHandler} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
                                             </div>
                                         </div>
                                     )
                                     : (
                                         <div className="nav nav-pills mt-5 mb-3">
                                             <div className="col-lg-1">
-                                                <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-1">Like</Link>
+                                                {hasLiked
+                                                    ? <Dislike />
+                                                    : <Like reportId={reportId} onLike={likeHandler} />
+                                                }
                                             </div>
                                         </div>
                                     )
