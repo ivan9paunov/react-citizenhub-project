@@ -13,9 +13,12 @@ const getAll = (reportId) => {
     return requester.get(`${BASE_URL}?${params.toString()}`);
 };
 
+const remove = (likeId) => requester.del(`${BASE_URL}/${likeId}`);
+
 const likesAPI = {
     create,
-    getAll
+    getAll,
+    remove
 };
 
 export default likesAPI;

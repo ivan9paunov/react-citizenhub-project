@@ -23,7 +23,7 @@ export default function ReportDetails() {
     const [report] = useGetOneReport(reportId);
     const { isAdmin, isAuthenticated, userId, username } = useAuthContext();
     const navigate = useNavigate();
-    
+
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
             const newComment = await createComment(reportId, comment);
@@ -53,9 +53,14 @@ export default function ReportDetails() {
             console.log(err.message);
         }
     };
-    
+
     const likeHandler = (newLike) => {
-        dispatchLikes({type: 'LIKE', payload: newLike});
+        dispatchLikes({ type: 'LIKE', payload: newLike });
+    };
+
+    const likeId = likes.find((like) => like._ownerId == userId)?._id;
+    const dislikeHandler = (likeId) => {
+        dispatchLikes({ type: 'DISLIKE', payload: likeId });
     };
 
     const isOwner = userId == report._ownerId;
@@ -103,7 +108,7 @@ export default function ReportDetails() {
                                         <div className="nav nav-pills mt-5 mb-3">
                                             <div className="col-lg-1">
                                                 {hasLiked
-                                                    ? <Dislike />
+                                                    ? <Dislike likeId={likeId} onDislike={dislikeHandler} />
                                                     : <Like reportId={reportId} onLike={likeHandler} />
                                                 }
                                             </div>

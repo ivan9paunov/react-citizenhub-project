@@ -7,6 +7,12 @@ export function useCreateLike() {
     return createHandler;
 };
 
+export function useRemoveLike() {
+    const removeHandler = (likeId) => likesAPI.remove(likeId);
+
+    return removeHandler;
+}
+
 function likesReducer(state, action) {
     switch (action.type) {
         case "GET_ALL":
