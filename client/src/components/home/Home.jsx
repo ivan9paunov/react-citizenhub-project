@@ -16,7 +16,7 @@ export default function Home() {
                         <h1 className="display-3 text-uppercase mb-0">Welcome to CitizenHub</h1>
                     </div>
                     <h4 className="text-body mb-4">Helping you address issues in Hisarya</h4>
-                    <p className="mb-4">CitizenHub is your go-to platform for reporting and resolving various issues in our beautiful town of Hisarya. Whether it's illegal parking, public lighting problems, or road maintenance requests, we're here to ensure your concerns are heard and addressed promptly. Join us in making Hisarya a better place for everyone.</p>
+                    <p className="mb-4" style={{ textAlign: "justify" }}>CitizenHub is your go-to platform for reporting and resolving various issues in our beautiful town of Hisarya. Whether it's improper parking, public lighting problems, or road maintenance requests, we're here to ensure your concerns are heard and addressed promptly. Join us in making Hisarya a better place for everyone.</p>
                     <div className="rounded bg-dark p-5">
                         <div className={styles.contactUsContainer}>CONTACT US</div>
                         <div className="tab-content">
