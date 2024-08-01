@@ -22,9 +22,9 @@ export default function ReportDetails() {
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
-            const newComment = await createComment(reportId, comment, username);
+            const newComment = await createComment(reportId, comment);
 
-            dispatch({ type: 'ADD_COMMENT', payload: newComment });
+            dispatch({ type: 'ADD_COMMENT', payload: { ...newComment, author: { username } } });
         } catch (err) {
             console.log(err.message);
         }
@@ -117,7 +117,7 @@ export default function ReportDetails() {
                     <div key={comment._id} className="bg-secondary d-flex mb-4 rounded">
                         <div className="container p-3">
                             <div className="row d-flex justify-content-between">
-                                <div className="col-lg-3 bg-dark rounded" style={{textAlign: 'center'}}><h6 className="text-primary mt-1">{comment.author.username}{report._ownerId == comment._ownerId ? <span className="text-white"> (author)</span> : ""}</h6></div>
+                                <div className="col-lg-3 bg-dark rounded" style={{ textAlign: 'center' }}><h6 className="text-primary mt-1">{comment.author.username}{report._ownerId == comment._ownerId ? <span className="text-white"> (author)</span> : ""}</h6></div>
                                 <div className="col-lg-8" style={{ textAlign: "end" }}><h6><small><i>{formatDate(comment._createdOn)}</i></small></h6></div>
                                 {userId == comment._ownerId || isAdmin
                                     ? <div className="col-lg-1" style={{ textAlign: "end" }}><button onClick={commentDeleteHandler} data-id={comment._id} className="btn btn-sm btn-primary">x</button></div>

@@ -1320,6 +1320,12 @@
     var identity = "email";
     var protectedData = {
         users: {
+            "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
+                email: "admin@abv.bg",
+                username: "admin",
+                hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302",
+                isAdmin: true
+            },
             "935f0fb7-a6fc-4084-99b0-b084a1ec87f1": {
                 email: "ivan@abv.bg",
                 username: "ivan",
@@ -1338,12 +1344,48 @@
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
                 isAdmin: false
             },
-            "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
-                email: "admin@abv.bg",
-                username: "admin",
-                hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302",
-                isAdmin: true
-            }
+            "499aa137-1ea7-4b6f-a109-3d9421be8ad7": {
+                email: "krasa@abv.bg",
+                username: "krasa",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "e67a5082-f15c-4108-b5e7-3e58cb471ec3": {
+                email: "pepa@abv.bg",
+                username: "pepa",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "2df999fa-98b0-4b6b-a77e-42b8ec8e087b": {
+                email: "mata_hari@abv.bg",
+                username: "mata_hari",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "60c871cf-2195-4cc5-af5a-5cd10e0cdeaf": {
+                email: "tachkata@abv.bg",
+                username: "tachkata",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "fd0132c4-c9f9-4916-84ae-8945ac7e869a": {
+                email: "dayana@abv.bg",
+                username: "dayana",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "c941366a-2b63-4afe-8c02-35fd06c0759a": {
+                email: "alonso@abv.bg",
+                username: "alonso",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
+            "6c631c55-58e6-4897-9995-8299f5ddc7d4": {
+                email: "chris_wood@abv.bg",
+                username: "chris_wood",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                isAdmin: false
+            },
         },
         sessions: {
         }
@@ -1526,44 +1568,32 @@
         },
         comments: {
             "25edb8aa-afa4-455e-8c28-0119afa2fbe2": {
-                _ownerId: "935f0fb7-a6fc-4084-99b0-b084a1ec87f1",
-                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
-                comment: "Is it still there?",
-                author: {
-                    username: "ivan"
-                },
-                _createdOn: 1722427261525,
-                _id: "25edb8aa-afa4-455e-8c28-0119afa2fbe2"
+                "_ownerId": "935f0fb7-a6fc-4084-99b0-b084a1ec87f1",
+                "reportId": "e55b732a-d181-4ec7-a767-2381349ceb02",
+                "comment": "Is it still there?",
+                "_createdOn": 1722427261525,
+                "_id": "25edb8aa-afa4-455e-8c28-0119afa2fbe2"
             },
             "a18b7822-68e3-49cd-bb01-7d504a053d5d": {
-                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
-                comment: "Yes, it is!",
-                author: {
-                    username: "peter"
-                },
-                _createdOn: 1722427652470,
-                _id: "a18b7822-68e3-49cd-bb01-7d504a053d5d"
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "reportId": "e55b732a-d181-4ec7-a767-2381349ceb02",
+                "comment": "Yes, it is!",
+                "_createdOn": 1722427652470,
+                "_id": "a18b7822-68e3-49cd-bb01-7d504a053d5d"
             },
             "2eb3fab9-fd01-47d3-952b-e07bd2536bf5": {
-                _ownerId: "6c631c55-58e6-4897-9995-8299f5ddc7d4",
-                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
-                comment: "Workers from the municipal enterprise are at the location and are currently cutting the tree. It should be removed within an hour.",
-                author: {
-                    username: "chris_wood"
-                },
-                _createdOn: 1722428022630,
-                _id: "2eb3fab9-fd01-47d3-952b-e07bd2536bf5"
+                "_ownerId": "6c631c55-58e6-4897-9995-8299f5ddc7d4",
+                "reportId": "e55b732a-d181-4ec7-a767-2381349ceb02",
+                "comment": "Workers from the municipal enterprise are at the location and are currently cutting the tree. It should be removed within an hour.",
+                "_createdOn": 1722428022630,
+                "_id": "2eb3fab9-fd01-47d3-952b-e07bd2536bf5"
             },
             "2a349371-163a-41ac-a4e1-6e09995efca6": {
-                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-                reportId: "e55b732a-d181-4ec7-a767-2381349ceb02",
-                comment: "It's clear now!",
-                author: {
-                    username: "george"
-                },
-                _createdOn: 1722432902972,
-                _id: "2a349371-163a-41ac-a4e1-6e09995efca6"
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "reportId": "e55b732a-d181-4ec7-a767-2381349ceb02",
+                "comment": "It's clear now!",
+                "_createdOn": 1722432902972,
+                "_id": "2a349371-163a-41ac-a4e1-6e09995efca6"
             }
         },
         likes: {

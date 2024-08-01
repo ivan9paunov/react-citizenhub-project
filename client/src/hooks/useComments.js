@@ -1,8 +1,8 @@
-import { act, useEffect, useReducer } from "react";
-import commentsApi from "../api/comments-api.js";
+import { useEffect, useReducer } from "react";
+import commentsAPI from "../api/comments-api.js";
 
 export function useCreateComment() {
-    const createHandler = (reportId, comment, username) => commentsApi.create(reportId, comment, username);
+    const createHandler = (reportId, comment) => commentsAPI.create(reportId, comment);
 
     return createHandler;
 };
@@ -24,7 +24,7 @@ export function useGetAllComments(reportId) {
 
     useEffect(() => {
         (async () => {
-            const result = await commentsApi.getAll(reportId);
+            const result = await commentsAPI.getAll(reportId);
 
             dispatch({ type: 'GET_ALL', payload: result });
         })();
