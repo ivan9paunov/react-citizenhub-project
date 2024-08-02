@@ -10,6 +10,8 @@ import commentsApi from "../../api/comments-api.js";
 import Like from "../likes/like/Like.jsx";
 import { useGetAllLikes } from "../../hooks/useLikes.js";
 import Dislike from "../likes/dislike/Dislike.jsx";
+import CustomModal from "../customModal/CustomModal.jsx";
+import { useState } from "react";
 
 const initialValues = {
     comment: ''
@@ -24,6 +26,8 @@ export default function ReportDetails() {
     const { isAdmin, isAuthenticated, userId, username } = useAuthContext();
     const navigate = useNavigate();
 
+    const [showDeleteModal, setShowDeleteModal] = useState(null);
+
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
             const newComment = await createComment(reportId, comment);
@@ -34,9 +38,12 @@ export default function ReportDetails() {
         }
     });
 
+    const reportDeleteClickHandler = (reportId) => setShowDeleteModal(reportId);
+
     const reportDeleteHandler = async () => {
         try {
             await reportsAPI.remove(reportId);
+            setShowDeleteModal(null);
             navigate('/reports');
         } catch (err) {
             console.log(err.message);
@@ -100,7 +107,14 @@ export default function ReportDetails() {
                                                 <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-2">Archive</Link>
                                             </div>
                                             <div className="col-lg-3">
-                                                <Link onClick={reportDeleteHandler} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
+                                                <Link onClick={(reportId) => setShowDeleteModal(reportId)} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
+                                                {showDeleteModal && (
+                                                    <CustomModal
+                                                        action={'delete'}
+                                                        onConfirm={reportDeleteHandler}
+                                                        onClose={reportDeleteClickHandler}
+                                                    />
+                                                )};
                                             </div>
                                         </div>
                                     )

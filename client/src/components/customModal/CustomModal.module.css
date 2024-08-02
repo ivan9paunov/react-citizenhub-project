@@ -1,0 +1,51 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+}
+
+.modal {
+    width: 45rem;
+    position: absolute;
+    max-height: 90vh;
+    margin-top: auto;
+    border-radius: 20px;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+    z-index: 30;
+    margin-top: 500px;
+}
+
+@media (min-width: 930px) {
+    .modal {
+        width: 45rem;
+        left: calc(50% - 20rem);
+        border-radius: 14px;
+    }
+}
+
+.headers {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0px;
+    border-bottom: 1px solid #ccc;
+}
+
+.head-text {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
