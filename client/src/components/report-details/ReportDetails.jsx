@@ -23,7 +23,7 @@ export default function ReportDetails() {
     const [likes, dispatchLikes] = useGetAllLikes(reportId);
     const createComment = useCreateComment();
     const [report] = useGetOneReport(reportId);
-    const { isAdmin, isAuthenticated, userId, username } = useAuthContext();
+    const { isAuthenticated, userId, username } = useAuthContext();
     const navigate = useNavigate();
 
     const [showDeleteModal, setShowDeleteModal] = useState(null);
@@ -97,7 +97,7 @@ export default function ReportDetails() {
                                         <span className="text-uppercase text-secondary">{formatDate(report._createdOn)}</span>
                                     </div>
                                 </div>
-                                {isOwner || isAdmin
+                                {isOwner
                                     ? (
                                         <div className="nav nav-pills justify-content-between mt-5 mb-3">
                                             <div className="col-lg-3">
@@ -150,7 +150,7 @@ export default function ReportDetails() {
                             <div className="row d-flex justify-content-between">
                                 <div className="col-lg-3 bg-dark rounded" style={{ textAlign: 'center' }}><h6 className="text-primary mt-1">{comment.author.username}{report._ownerId == comment._ownerId ? <span className="text-white"> (author)</span> : ""}</h6></div>
                                 <div className="col-lg-8" style={{ textAlign: "end" }}><h6><small><i>{formatDate(comment._createdOn)}</i></small></h6></div>
-                                {userId == comment._ownerId || isAdmin
+                                {userId == comment._ownerId
                                     ? <div className="col-lg-1" style={{ textAlign: "end" }}><button onClick={commentDeleteHandler} data-id={comment._id} className="btn btn-sm btn-primary">x</button></div>
                                     : ''
                                 }

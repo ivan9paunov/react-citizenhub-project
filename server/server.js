@@ -1323,68 +1323,57 @@
             "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
                 email: "admin@abv.bg",
                 username: "admin",
-                hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302",
-                isAdmin: true
+                hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
             },
             "935f0fb7-a6fc-4084-99b0-b084a1ec87f1": {
                 email: "ivan@abv.bg",
                 username: "ivan",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "35c62d76-8152-4626-8712-eeb96381bea8": {
                 email: "peter@abv.bg",
                 username: "peter",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "847ec027-f659-4086-8032-5173e2f9c93a": {
                 email: "george@abv.bg",
                 username: "george",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "499aa137-1ea7-4b6f-a109-3d9421be8ad7": {
                 email: "krasa@abv.bg",
                 username: "krasa",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "e67a5082-f15c-4108-b5e7-3e58cb471ec3": {
                 email: "pepa@abv.bg",
                 username: "pepa",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "2df999fa-98b0-4b6b-a77e-42b8ec8e087b": {
                 email: "mata_hari@abv.bg",
                 username: "mata_hari",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "60c871cf-2195-4cc5-af5a-5cd10e0cdeaf": {
                 email: "tachkata@abv.bg",
                 username: "tachkata",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "fd0132c4-c9f9-4916-84ae-8945ac7e869a": {
                 email: "dayana@abv.bg",
                 username: "dayana",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "c941366a-2b63-4afe-8c02-35fd06c0759a": {
                 email: "alonso@abv.bg",
                 username: "alonso",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "6c631c55-58e6-4897-9995-8299f5ddc7d4": {
                 email: "chris_wood@abv.bg",
                 username: "chris_wood",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
-                isAdmin: false
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
         },
         sessions: {
