@@ -1,8 +1,8 @@
 import * as request from './requester.js';
 
-const BASE_URL = 'http://localhost:3030/jsonstore/archived';
+const BASE_URL = 'http://localhost:3030/data/archived';
 
-export const getAll = async () => {
+const getAll = async () => {
     const result = await request.get(BASE_URL);
 
     const archived = Object.values(result);
@@ -10,11 +10,14 @@ export const getAll = async () => {
     return archived;
 };
 
-export const getOne = (archiveId) => request.get(`${BASE_URL}/${archiveId}`);
+const getOne = (archiveId) => request.get(`${BASE_URL}/${archiveId}`);
+
+const create = (reportData) => request.post(`${BASE_URL}`, reportData);
 
 const archivedAPI = {
     getAll,
-    getOne
+    getOne,
+    create
 };
 
 export default archivedAPI;

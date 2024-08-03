@@ -7,7 +7,7 @@ export default function CustomModal({
 }) {
     return (
         <div className={styles.overlay}>
-            <div className={styles.backdrop} onClick={() => onClose(null)}></div>
+            <div className={styles.backdrop} onClick={onClose}></div>
             <div className={styles.modal}>
                 <div className="confirm-container">
                     <header className={styles.headers}>
@@ -24,10 +24,10 @@ export default function CustomModal({
                     <div className="actions">
                         <div className='row mt-3'>
                             <div className='col-lg-6'>
-                                <button onClick={() => onClose(null)} className="nav-link text-uppercase text-center w-50 bg-dark" type="button">Cancel</button>
+                                <button onClick={onClose} className="nav-link text-uppercase text-center w-50 bg-dark" type="button">Cancel</button>
                             </div>
                             <div className='col-lg-6 d-flex justify-content-end'>
-                                <button onClick={onConfirm} className="nav-link text-uppercase text-center w-50 active" type="submit">Delete</button>
+                                <button onClick={onConfirm} className="nav-link text-uppercase text-center w-50 active" type="submit">{action}</button>
                             </div>
                         </div>
                     </div>

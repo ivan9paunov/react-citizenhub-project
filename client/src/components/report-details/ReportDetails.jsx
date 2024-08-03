@@ -12,6 +12,7 @@ import { useGetAllLikes } from "../../hooks/useLikes.js";
 import Dislike from "../likes/dislike/Dislike.jsx";
 import CustomModal from "../customModal/CustomModal.jsx";
 import { useState } from "react";
+import archivedAPI from "../../api/archived-api.js";
 
 const initialValues = {
     comment: ''
@@ -19,14 +20,14 @@ const initialValues = {
 
 export default function ReportDetails() {
     const { reportId } = useParams();
+    const [report] = useGetOneReport(reportId);
     const [comments, dispatchComments] = useGetAllComments(reportId);
     const [likes, dispatchLikes] = useGetAllLikes(reportId);
-    const createComment = useCreateComment();
-    const [report] = useGetOneReport(reportId);
+    const [modalState, setModalState] = useState({ show: false, action: '' });
     const { isAuthenticated, userId, username } = useAuthContext();
+    const createComment = useCreateComment();
     const navigate = useNavigate();
 
-    const [showDeleteModal, setShowDeleteModal] = useState(null);
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
         try {
@@ -38,12 +39,25 @@ export default function ReportDetails() {
         }
     });
 
-    const reportDeleteClickHandler = (reportId) => setShowDeleteModal(reportId);
+    const showModalClickHandler = (action) => setModalState({ show: true, action });
+
+    const closeModalClickHandler = () => setModalState({ show: false, action: '' });
+
+    const reportArchiveHandler = async () => {
+        try {
+            await archivedAPI.create(report);
+            await reportsAPI.remove(reportId);
+            setModalState({ show: false, action: '' });
+            navigate('/archived');
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
 
     const reportDeleteHandler = async () => {
         try {
             await reportsAPI.remove(reportId);
-            setShowDeleteModal(null);
+            setModalState({ show: false, action: '' });
             navigate('/reports');
         } catch (err) {
             console.log(err.message);
@@ -104,18 +118,20 @@ export default function ReportDetails() {
                                                 <Link to={`/reports/${reportId}/edit`} className="nav-link text-uppercase text-center w-100 active">Edit</Link>
                                             </div>
                                             <div className="col-lg-3">
-                                                <Link className="nav-link text-uppercase text-center w-100 active" to="#pills-2">Archive</Link>
+                                                <Link onClick={() => showModalClickHandler('archive')} className="nav-link text-uppercase text-center w-100 active">Archive</Link>
                                             </div>
                                             <div className="col-lg-3">
-                                                <Link onClick={(reportId) => setShowDeleteModal(reportId)} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
-                                                {showDeleteModal && (
-                                                    <CustomModal
-                                                        action={'delete'}
-                                                        onConfirm={reportDeleteHandler}
-                                                        onClose={reportDeleteClickHandler}
-                                                    />
-                                                )};
+                                                <Link onClick={() => showModalClickHandler('delete')} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
                                             </div>
+                                            {modalState.show && (
+                                                <CustomModal
+                                                    action={modalState.action}
+                                                    onConfirm={modalState.action == 'archive'
+                                                        ? reportArchiveHandler
+                                                        : reportDeleteHandler}
+                                                    onClose={closeModalClickHandler}
+                                                />
+                                            )};
                                         </div>
                                     )
                                     : (
