@@ -26,7 +26,12 @@ export function useGetAllReports() {
 };
 
 export function useGetOneReport(reportId) {
-    const [report, setReport] = useState({});
+    const [report, setReport] = useState({
+        topic: '',
+        title: '',
+        location: '',
+        description: ''
+    });
 
     useEffect(() => {
         (async () => {

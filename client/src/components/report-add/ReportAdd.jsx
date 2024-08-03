@@ -10,7 +10,7 @@ const initialValues = {
     description: ''
 };
 
-export default function NewReport() {
+export default function ReportAdd() {
     const navigate = useNavigate();
     const createReport = useCreateReport();
     const { username } = useAuthContext();
