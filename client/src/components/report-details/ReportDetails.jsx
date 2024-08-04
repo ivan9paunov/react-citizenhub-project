@@ -1,18 +1,19 @@
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { useGetOneReport } from "../../hooks/useReports.js";
-import { formatDate } from "../../utils/dateUtils.js";
-import { useForm } from "../../hooks/useForm.js";
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
+import { useForm } from "../../hooks/useForm.js";
+import { useGetOneReport } from "../../hooks/useReports.js";
 import { useCreateComment, useGetAllComments } from "../../hooks/useComments.js";
-import reportsAPI from "../../api/reports-api.js";
-import commentsApi from "../../api/comments-api.js";
-import Like from "../likes/like/Like.jsx";
 import { useGetAllLikes } from "../../hooks/useLikes.js";
+import { formatDate } from "../../utils/dateUtils.js";
+import reportsAPI from "../../api/reports-api.js";
+import archivedAPI from "../../api/archived-api.js";
+import commentsAPI from "../../api/comments-api.js";
+import likesAPI from "../../api/likes-api.js";
+import Like from "../likes/like/Like.jsx";
 import Dislike from "../likes/dislike/Dislike.jsx";
 import CustomModal from "../customModal/CustomModal.jsx";
-import { useState } from "react";
-import archivedAPI from "../../api/archived-api.js";
 
 const initialValues = {
     comment: ''
@@ -45,7 +46,7 @@ export default function ReportDetails() {
 
     const reportArchiveHandler = async () => {
         try {
-            await archivedAPI.create(report);
+            await archivedAPI.create({ ...report, comments: comments, likes: likes });
             await reportsAPI.remove(reportId);
             setModalState({ show: false, action: '' });
             navigate('/archived');
@@ -67,7 +68,7 @@ export default function ReportDetails() {
     const commentDeleteHandler = async (e) => {
         const commentId = e.target.dataset.id;
         try {
-            await commentsApi.remove(commentId);
+            await commentsAPI.remove(commentId);
 
             dispatchComments({ type: 'DELETE_COMMENT', payload: commentId });
         } catch (err) {
@@ -89,8 +90,8 @@ export default function ReportDetails() {
 
     return (
         <>
-            <div className="container-fluid p-0" style={{ margin: "90px 0" }}>
-                <div className="row g-0">
+            <div className="container-fluid p-0" style={{ margin: "50px 0" }}>
+                <div className="row g-0 mx-5">
                     <div className="col-lg-3" style={{ minHeight: "500px" }}>
                         <div className="position-relative h-100">
                             <img className="position-absolute w-100 h-100" src={`/${report.topic}`} style={{ objectFit: "cover" }} />
