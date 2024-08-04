@@ -1,8 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
     const { isAuthenticated } = useAuthContext();
+    const location = useLocation();
+    const [activeLink, setActiveLink] = useState('');
+
+    useEffect(() => {
+        setActiveLink(location.pathname);
+    }, [location]);
 
     return (
         <div className="container-fluid bg-dark px-0">
@@ -53,20 +60,20 @@ export default function Header() {
                         </button>
                         <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div className="navbar-nav mr-auto py-0">
-                                <Link to="/" className="nav-item nav-link active">Home</Link>
-                                <Link to="/reports" className="nav-item nav-link">Reports</Link>
-                                <Link to="/archived" className="nav-item nav-link">Archived</Link>
+                                <Link to="/" className={`nav-item nav-link ${activeLink == '/' ? 'active' : ''}`}>Home</Link>
+                                <Link to="/reports" className={`nav-item nav-link ${activeLink.startsWith('/reports') ? 'active' : ''}`}>Reports</Link>
+                                <Link to="/archived" className={`nav-item nav-link ${activeLink.startsWith('/archived') ? 'active' : ''}`}>Archived</Link>
                                 {isAuthenticated
                                     ? (
                                         <>
-                                            <Link to="/report-it" className="nav-item nav-link">Report It</Link>
-                                            <Link to="/logout" className="nav-item nav-link">Logout</Link>
+                                            <Link to="/report-it" className={`nav-item nav-link ${activeLink == '/report-it' ? 'active' : ''}`}>Report It</Link>
+                                            <Link to="/logout" className={`nav-item nav-link ${activeLink == '/logout' ? 'active' : ''}`}>Logout</Link>
                                         </>
                                     )
                                     : (
                                         <>
-                                            <Link to="/login" className="nav-item nav-link">Login</Link>
-                                            <Link to="/register" className="nav-item nav-link">Register</Link>
+                                            <Link to="/login" className={`nav-item nav-link ${activeLink == '/login' ? 'active' : ''}`}>Login</Link>
+                                            <Link to="/register" className={`nav-item nav-link ${activeLink == '/register' ? 'active' : ''}`}>Register</Link>
                                         </>
                                     )
 
