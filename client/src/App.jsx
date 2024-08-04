@@ -13,6 +13,7 @@ import ArchiveList from "./components/archive-list/ArchiveList.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
 import Logout from "./components/logout/Logout.jsx";
+import ArchiveDetails from "./components/archive-details/ArchiveDetails.jsx";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/reports/:reportId/details" element={<ReportDetails />} />
                 <Route path="/reports/:reportId/edit" element={<ReportEdit />} />
                 <Route path="/archived" element={<ArchiveList />} />
+                <Route path="/archived/:archiveId/details" element={<ArchiveDetails />} />
                 <Route path="/report-it" element={<ReportAdd />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
