@@ -17,6 +17,10 @@ import ArchiveDetails from "./components/archive-details/ArchiveDetails.jsx";
 
 import "../public/css/style.css";
 import PageNotFound from "./components/page-not-found/PageNotFound.jsx";
+import GuestGuard from "./common/GuestGuard.jsx";
+import UserGuard from "./common/UserGuard.jsx";
+import UnauthorizedGuard from "./common/UnauthorizedGuard.jsx";
+import PageServerError from "./components/page-server-error/PageServerError.jsx";
 
 function App() {
     return (
@@ -28,13 +32,22 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/reports" element={<ReportList />} />
                         <Route path="/reports/:reportId/details" element={<ReportDetails />} />
-                        <Route path="/reports/:reportId/edit" element={<ReportEdit />} />
                         <Route path="/archived" element={<ArchiveList />} />
                         <Route path="/archived/:archiveId/details" element={<ArchiveDetails />} />
-                        <Route path="/report-it" element={<ReportAdd />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/logout" element={<Logout />} />
+                        <Route element={<GuestGuard />}>
+                            <Route path="/reports/:reportId/edit" element={<ReportEdit />} />
+                            <Route path="/report-it" element={<ReportAdd />} />
+                            <Route path="/logout" element={<Logout />} />
+                        </Route>
+                        <Route element={<UserGuard />}>
+                            <Route element={<UnauthorizedGuard />}>
+                                <Route path="/reports/:reportId/edit" element={<ReportEdit />} />
+                            </Route>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                        </Route>
+                        <Route path="/page-not-found" element={<PageNotFound />} />
+                        <Route path="/server-error" element={<PageServerError />} />
                         <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </div>
