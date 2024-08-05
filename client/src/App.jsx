@@ -16,6 +16,7 @@ import Logout from "./components/logout/Logout.jsx";
 import ArchiveDetails from "./components/archive-details/ArchiveDetails.jsx";
 
 import "../public/css/style.css";
+import PageNotFound from "./components/page-not-found/PageNotFound.jsx";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Logout />} />
+                        <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </div>
                 <Footer />
