@@ -16,7 +16,7 @@ export default function ArchiveList() {
                     ? <Spinner />
                     : archived.length > 0
                         ? archived.map(archive => <ArchiveListItem key={archive._id} {...archive} />)
-                        : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21" }}>No issues resolved</h3>
+                        : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21", fontSize: "6rem" }}>No issues resolved</h3>
                 }
             </div>
         </div>

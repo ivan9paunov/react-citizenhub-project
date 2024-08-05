@@ -5,7 +5,7 @@ import { useGetAllReports } from "../../hooks/useReports.js";
 
 export default function ReportList() {
     const { reports, isLoading } = useGetAllReports();
-    
+
     return (
         <div className="container-fluid p-5">
             <div className="mb-5 text-center">
@@ -17,7 +17,7 @@ export default function ReportList() {
                     ? <Spinner />
                     : reports.length > 0
                         ? reports.map(report => <ReportListItem key={report._id} {...report} />)
-                        : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21" }}>No current issues</h3>
+                        : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21", fontSize: "6rem" }}>No current issues</h3>
                 }
             </div>
         </div>
