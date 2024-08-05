@@ -90,7 +90,7 @@ h6,
 }
 
 @media (max-width: 991.98px) {
-    .navbar-dark .navbar-nav .nav-link  {
+    .navbar-dark .navbar-nav .nav-link {
         margin-right: 0;
         padding: 10px 0;
     }
@@ -134,7 +134,7 @@ h6,
 }
 
 .programe::after {
-    position :absolute;
+    position: absolute;
     content: "";
     width: 100%;
     height: calc(100% - 45px);
@@ -181,7 +181,7 @@ h6,
 }
 
 .testimonial-carousel .owl-nav .owl-prev,
-.testimonial-carousel .owl-nav .owl-next{
+.testimonial-carousel .owl-nav .owl-next {
     position: relative;
     margin: 0 5px;
     width: 45px;
@@ -218,4 +218,18 @@ h6,
     .credit {
         background: var(--primary);
     }
+}
+
+.border-danger-thick {
+    border: 3px solid red;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    flex: 1;
 }
