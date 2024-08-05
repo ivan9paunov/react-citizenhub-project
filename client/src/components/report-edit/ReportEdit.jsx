@@ -3,20 +3,46 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "../../hooks/useForm.js";
 import { useGetOneReport } from "../../hooks/useReports.js";
 import reportsAPI from "../../api/reports-api.js";
+import { useState } from "react";
 
 export default function ReportEdit() {
     const navigate = useNavigate();
     const { reportId } = useParams();
     const [report] = useGetOneReport(reportId);
+    const [errors, setErrors] = useState({});
 
     const {
         values,
         changeHandler,
         submitHandler
     } = useForm(report, async (values) => {
-        await reportsAPI.update(reportId, values);
+        const newErrors = {};
 
-        navigate(`/reports/${reportId}/details`);
+        if (!values.title) {
+            newErrors.title = 'Title is required';
+        }
+
+        if (!values.location) {
+            newErrors.location = 'Location is required';
+        }
+
+        if (!values.description) {
+            newErrors.description = 'Description is required';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            throw new Error("All fields are required");
+        }
+
+        try {
+            await reportsAPI.update(reportId, values);
+
+            navigate(`/reports/${reportId}/details`);
+        } catch (err) {
+            setErrors({ general: err.message });
+            throw err;
+        }
     }, true);
 
     return (
@@ -27,7 +53,10 @@ export default function ReportEdit() {
                 </div>
                 <div className="col-md-6 p-5 my-200px" style={{ width: "500px" }}>
                     <h3 className="text-light text-uppercase mb-4 text-center">Edit Report</h3>
-                    <h5 className="text-primary text-uppercase mb-4 text-center">Please provide detailed information</h5>
+                    {!Object.keys(errors).length
+                        ? <h5 className="text-primary text-uppercase mb-4 text-center">Please provide detailed information</h5>
+                        : <h5 className="text-danger text-uppercase mb-4 text-center">All fields are required</h5>
+                    }
                     <form onSubmit={submitHandler}>
                         <div className="row g-3">
                             <div className="col-12">
@@ -60,7 +89,7 @@ export default function ReportEdit() {
                                     name="title"
                                     value={values.title}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.title ? 'border-danger-thick' : 'border-0'}`}
                                     placeholder="Title"
                                     style={{ height: "55px" }}
                                 />
@@ -71,7 +100,7 @@ export default function ReportEdit() {
                                     name="location"
                                     value={values.location}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.location ? 'border-danger-thick' : 'border-0'}`}
                                     placeholder="Location"
                                     style={{ height: "55px" }}
                                 />
@@ -81,7 +110,7 @@ export default function ReportEdit() {
                                     name="description"
                                     value={values.description}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.description ? 'border-danger-thick' : 'border-0'}`}
                                     rows="5"
                                     placeholder="Description"
                                 ></textarea>

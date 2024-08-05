@@ -1,7 +1,9 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useAuthContext } from "../../contexts/AuthContext.jsx";
 import { useForm } from "../../hooks/useForm.js";
 import { useCreateReport } from "../../hooks/useReports.js";
-import { useNavigate } from "react-router-dom";
 
 const initialValues = {
     topic: 'img/colonada.jpg',
@@ -14,14 +16,39 @@ export default function ReportAdd() {
     const navigate = useNavigate();
     const createReport = useCreateReport();
     const { username } = useAuthContext();
+    const [errors, setErrors] = useState({});
 
     const createHandler = async (values) => {
+        const newErrors = {};
+
+        if (!values.topic || values.topic == "img/colonada.jpg") {
+            newErrors.topic = 'Topic is required';
+        }
+
+        if (!values.title) {
+            newErrors.title = 'Title is required';
+        }
+
+        if (!values.location) {
+            newErrors.location = 'Location is required';
+        }
+
+        if (!values.description) {
+            newErrors.description = 'Description is required';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            throw new Error("All fields are required");
+        }
+
         try {
             const { _id: reportId } = await createReport({ ...values, author: username });
+
             navigate(`/reports/${reportId}/details`);
         } catch (err) {
-            // TODO: Set error state and display error
-            console.log(err.message);
+            setErrors({ general: err.message });
+            throw err;
         }
     };
 
@@ -35,7 +62,10 @@ export default function ReportAdd() {
                 </div>
                 <div className="col-md-6 p-5 my-200px" style={{ width: "500px" }}>
                     <h3 className="text-light text-uppercase mb-4 text-center">New Report</h3>
-                    <h5 className="text-primary text-uppercase mb-4 text-center">Please provide detailed information</h5>
+                    {!Object.keys(errors).length
+                        ? <h5 className="text-primary text-uppercase mb-4 text-center">Please provide detailed information</h5>
+                        : <h5 className="text-danger text-uppercase mb-4 text-center">All fields are required</h5>
+                    }
                     <form onSubmit={submitHandler}>
                         <div className="row g-3">
                             <div className="col-12">
@@ -44,14 +74,14 @@ export default function ReportAdd() {
                                     id="topic"
                                     value={values.topic}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.topic ? 'border-danger-thick' : 'border-0'}`}
                                     style={{ height: "55px" }}
                                 >
                                     <option value="img/colonada.jpg" disabled>Select Topic:</option>
-                                    <option value="img/flooding-road.jfif">Blocked Stormwater Drain</option>
+                                    <option value="img/flooding-road.jpg">Blocked Stormwater Drain</option>
                                     <option value="img/childrens-playground.jpg">Children's Playground Repair</option>
                                     <option value="img/fallen-tree.jpg">Fallen Tree</option>
-                                    <option value="img/illegal-dumping.JPG">Illegal Dumping</option>
+                                    <option value="img/illegal-dumping.jpg">Illegal Dumping</option>
                                     <option value="img/no-parking.png">Improper Parking</option>
                                     <option value="img/public-bin.jpeg">Litter Bins Maintenance and Garbage Collect</option>
                                     <option value="img/lost-belongings.jpg">Lost Belongings</option>
@@ -68,7 +98,7 @@ export default function ReportAdd() {
                                     name="title"
                                     value={values.title}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.title ? 'border-danger-thick' : 'border-0'}`}
                                     placeholder="Title"
                                     style={{ height: "55px" }}
                                 />
@@ -79,7 +109,7 @@ export default function ReportAdd() {
                                     name="location"
                                     value={values.location}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.location ? 'border-danger-thick' : 'border-0'}`}
                                     placeholder="Location"
                                     style={{ height: "55px" }}
                                 />
@@ -89,7 +119,7 @@ export default function ReportAdd() {
                                     name="description"
                                     value={values.description}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${errors.description ? 'border-danger-thick' : 'border-0'}`}
                                     rows="5"
                                     placeholder="Description"
                                 ></textarea>

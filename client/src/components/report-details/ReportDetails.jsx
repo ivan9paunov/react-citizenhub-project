@@ -10,7 +10,6 @@ import { formatDate } from "../../utils/dateUtils.js";
 import reportsAPI from "../../api/reports-api.js";
 import archivedAPI from "../../api/archived-api.js";
 import commentsAPI from "../../api/comments-api.js";
-import likesAPI from "../../api/likes-api.js";
 import Like from "../likes/like/Like.jsx";
 import Dislike from "../likes/dislike/Dislike.jsx";
 import CustomModal from "../customModal/CustomModal.jsx";
@@ -23,6 +22,7 @@ export default function ReportDetails() {
     const { reportId } = useParams();
     const [report] = useGetOneReport(reportId);
     const [comments, dispatchComments] = useGetAllComments(reportId);
+    const [commentError, setCommentError] = useState('');
     const [likes, dispatchLikes] = useGetAllLikes(reportId);
     const [modalState, setModalState] = useState({ show: false, action: '' });
     const { isAuthenticated, userId, username } = useAuthContext();
@@ -31,12 +31,17 @@ export default function ReportDetails() {
 
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, async ({ comment }) => {
+        if (!comment) {
+            setCommentError('Please type your comment');
+            throw new Error('Please type your comment');
+        }
+
         try {
             const newComment = await createComment(reportId, comment);
-
+            setCommentError('');
             dispatchComments({ type: 'ADD_COMMENT', payload: { ...newComment, author: { username } } });
         } catch (err) {
-            console.log(err.message);
+            throw new Error(err.message);
         }
     });
 
@@ -51,7 +56,7 @@ export default function ReportDetails() {
             setModalState({ show: false, action: '' });
             navigate('/archived');
         } catch (err) {
-            console.log(err.message);
+            throw new Error(err.message);
         }
     };
 
@@ -61,7 +66,7 @@ export default function ReportDetails() {
             setModalState({ show: false, action: '' });
             navigate('/reports');
         } catch (err) {
-            console.log(err.message);
+            throw new Error(err.message);
         }
     };
 
@@ -72,7 +77,7 @@ export default function ReportDetails() {
 
             dispatchComments({ type: 'DELETE_COMMENT', payload: commentId });
         } catch (err) {
-            console.log(err.message);
+            throw new Error(err.message);
         }
     };
 
@@ -112,40 +117,42 @@ export default function ReportDetails() {
                                         <span className="text-uppercase text-secondary">{formatDate(report._createdOn)}</span>
                                     </div>
                                 </div>
-                                {isOwner
-                                    ? (
-                                        <div className="nav nav-pills justify-content-between mt-5 mb-3">
-                                            <div className="col-lg-3">
-                                                <Link to={`/reports/${reportId}/edit`} className="nav-link text-uppercase text-center w-100 active">Edit</Link>
+                                {isAuthenticated && <>
+                                    {isOwner
+                                        ? (
+                                            <div className="nav nav-pills justify-content-between mt-5 mb-3">
+                                                <div className="col-lg-3">
+                                                    <Link to={`/reports/${reportId}/edit`} className="nav-link text-uppercase text-center w-100 active">Edit</Link>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <Link onClick={() => showModalClickHandler('archive')} className="nav-link text-uppercase text-center w-100 active">Archive</Link>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <Link onClick={() => showModalClickHandler('delete')} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
+                                                </div>
+                                                {modalState.show && (
+                                                    <CustomModal
+                                                        action={modalState.action}
+                                                        onConfirm={modalState.action == 'archive'
+                                                            ? reportArchiveHandler
+                                                            : reportDeleteHandler}
+                                                        onClose={closeModalClickHandler}
+                                                    />
+                                                )};
                                             </div>
-                                            <div className="col-lg-3">
-                                                <Link onClick={() => showModalClickHandler('archive')} className="nav-link text-uppercase text-center w-100 active">Archive</Link>
+                                        )
+                                        : (
+                                            <div className="nav nav-pills mt-5 mb-3">
+                                                <div className="col-lg-1">
+                                                    {hasLiked
+                                                        ? <Dislike likeId={likeId} onDislike={dislikeHandler} />
+                                                        : <Like reportId={reportId} onLike={likeHandler} />
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className="col-lg-3">
-                                                <Link onClick={() => showModalClickHandler('delete')} className="nav-link text-uppercase text-center w-100 active">Delete</Link>
-                                            </div>
-                                            {modalState.show && (
-                                                <CustomModal
-                                                    action={modalState.action}
-                                                    onConfirm={modalState.action == 'archive'
-                                                        ? reportArchiveHandler
-                                                        : reportDeleteHandler}
-                                                    onClose={closeModalClickHandler}
-                                                />
-                                            )};
-                                        </div>
-                                    )
-                                    : (
-                                        <div className="nav nav-pills mt-5 mb-3">
-                                            <div className="col-lg-1">
-                                                {hasLiked
-                                                    ? <Dislike likeId={likeId} onDislike={dislikeHandler} />
-                                                    : <Like reportId={reportId} onLike={likeHandler} />
-                                                }
-                                            </div>
-                                        </div>
-                                    )
-                                }
+                                        )
+                                    }
+                                </>}
                             </div>
                         </div>
                     </div>
@@ -190,7 +197,7 @@ export default function ReportDetails() {
                                     name="comment"
                                     value={values.comment}
                                     onChange={changeHandler}
-                                    className="form-control bg-white border-0"
+                                    className={`form-control bg-white ${commentError ? 'border-danger-thick' : 'border-0'}`}
                                     rows="5"
                                     placeholder="Comment"
                                 ></textarea>

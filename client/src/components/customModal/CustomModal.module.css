@@ -27,7 +27,7 @@
     padding: 1rem;
     box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
     z-index: 30;
-    margin-top: 500px;
+    margin-top: 400px;
 }
 
 @media (min-width: 930px) {

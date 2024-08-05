@@ -20,9 +20,13 @@ export function useForm(initialValues, submitCallback, reinitializeForm = false)
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        await submitCallback(values);
-        
-        setValues(initialValues);
+        try {
+            await submitCallback(values);
+            
+            setValues(initialValues);
+        } catch (error) {
+            console.error("Submission failed:", error);
+        }
     };
 
     return {
