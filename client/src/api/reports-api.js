@@ -2,8 +2,24 @@ import * as request from './requester.js';
 
 const BASE_URL = 'http://localhost:3030/data/reports';
 
-const getAll = async () => {
-    const result = await request.get(`${BASE_URL}?sortBy=_createdOn%20desc`);
+const getAll = async (filterValues) => {
+    let requestURL = BASE_URL;
+
+    if (filterValues.order == 'newest') {
+        requestURL += '?sortBy=_createdOn%20desc';
+    } else {
+        requestURL += '?sortBy=_createdOn';
+    }
+
+    if (filterValues.topic != 'all') {
+        const params = new URLSearchParams({
+            where: `topic="${filterValues.topic}"`
+        });
+
+        requestURL += `&${params.toString()}`;
+    }
+
+    const result = await request.get(requestURL);
 
     const reports = Object.values(result);
 

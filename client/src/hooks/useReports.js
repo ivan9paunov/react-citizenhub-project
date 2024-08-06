@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import reportsAPI from "../api/reports-api.js";
 import { useNavigate } from "react-router-dom";
 
-export function useGetAllReports() {
+export function useGetAllReports(filterValues) {
     const [reports, setReports] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export function useGetAllReports() {
     useEffect(() => {
         (async () => {
             try {
-                const result = await reportsAPI.getAll();
+                const result = await reportsAPI.getAll(filterValues);
 
                 setReports(result);
             } catch (err) {
@@ -28,7 +28,7 @@ export function useGetAllReports() {
                 setIsLoading(false);
             }
         })();
-    }, []);
+    }, [filterValues]);
 
     return {
         reports,
