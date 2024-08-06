@@ -1,4 +1,6 @@
 import { useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+
 import likesAPI from "../api/likes-api.js";
 
 export function useCreateLike() {
@@ -27,12 +29,25 @@ function likesReducer(state, action) {
 
 export function useGetAllLikes(reportId) {
     const [likes, dispatchLikes] = useReducer(likesReducer, []);
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
-            const result = await likesAPI.getAll(reportId);
+            try {
+                const result = await likesAPI.getAll(reportId);
 
-            dispatchLikes({ type: "GET_ALL", payload: result });
+                dispatchLikes({ type: "GET_ALL", payload: result });
+            } catch (err) {
+                if (err.code.toString().startsWith('4')) {
+                    navigate('/404');
+                    throw new Error(err.message);
+                }
+
+                if (err.code.toString().startsWith('5')) {
+                    navigate('/server-error');
+                    throw new Error(err.message);
+                }
+            }
         })();
     }, [reportId]);
 

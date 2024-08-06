@@ -1,4 +1,6 @@
 import { useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+
 import commentsAPI from "../api/comments-api.js";
 
 export function useCreateComment() {
@@ -21,12 +23,25 @@ function commentsReducer(state, action) {
 
 export function useGetAllComments(reportId) {
     const [comments, dispatchComments] = useReducer(commentsReducer, []);
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
-            const result = await commentsAPI.getAll(reportId);
+            try {
+                const result = await commentsAPI.getAll(reportId);
 
-            dispatchComments({ type: 'GET_ALL', payload: result });
+                dispatchComments({ type: 'GET_ALL', payload: result });
+            } catch (err) {
+                if (err.code.toString().startsWith('4')) {
+                    navigate('/404');
+                    throw new Error(err.message);
+                }
+
+                if (err.code.toString().startsWith('5')) {
+                    navigate('/server-error');
+                    throw new Error(err.message);
+                }
+            }
         })();
     }, [reportId]);
 
