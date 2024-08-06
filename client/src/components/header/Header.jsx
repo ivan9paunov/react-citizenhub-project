@@ -22,12 +22,12 @@ export default function Header() {
                 <div className="col-lg-9">
                     <div className="row gx-0 bg-secondary d-none d-lg-flex">
                         <div className="col-lg-7 px-5 text-start">
-                            <div className="h-100 d-inline-flex align-items-center py-2 me-4">
-                                <i className="fa fa-envelope text-primary me-2"></i>
+                            <div className="h-100 d-inline-flex align-items-center align-middle py-2 me-4">
+                                <i className="fa fa-envelope text-primary me-2" style={{ fontSize: 'larger' }}></i>
                                 <h6 className="mb-0">contacts@hisarya.bg</h6>
                             </div>
-                            <div className="h-100 d-inline-flex align-items-center py-2">
-                                <i className="fa fa-phone-alt text-primary me-2"></i>
+                            <div className="h-100 d-inline-flex align-items-center align-middle py-2">
+                                <i className="fa fa-phone-alt text-primary me-2" style={{ fontSize: 'large' }}></i>
                                 <h6 className="mb-0">0337/ 6 21 80</h6>
                             </div>
                         </div>

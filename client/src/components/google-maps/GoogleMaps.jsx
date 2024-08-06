@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const mapContainerStyle = {
     width: '100%',
@@ -18,7 +18,9 @@ export default function GoogleMaps() {
                 mapContainerStyle={mapContainerStyle}
                 center={center}
                 zoom={15}
-            ></GoogleMap>
+            >
+                <Marker position={center} />
+            </GoogleMap>
         </LoadScript>
     );
 }
