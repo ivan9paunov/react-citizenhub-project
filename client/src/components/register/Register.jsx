@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useRegister } from "../../hooks/useAuth.js";
 import { useForm } from "../../hooks/useForm.js";
+import useClickOutside from "../../hooks/useClickOutside.js";
 
 const initialValues = { username: '', email: '', password: '', rePass: '' };
 
@@ -63,6 +64,8 @@ export default function Register() {
         </p>
     );
 
+    const textareaRef = useClickOutside(() => setErrors(''));
+
     return (
         <div className="py-5">
             <div className="bg-dark rounded p-5 mx-auto my-200px" style={{ width: "500px" }}>
@@ -74,6 +77,7 @@ export default function Register() {
                             <input
                                 type="text"
                                 name="username"
+                                ref={textareaRef}
                                 value={values.username}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.username)}`}
@@ -86,6 +90,7 @@ export default function Register() {
                             <input
                                 type="email"
                                 name="email"
+                                ref={textareaRef}
                                 value={values.email}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.email)}`}
@@ -98,6 +103,7 @@ export default function Register() {
                             <input
                                 type="password"
                                 name="password"
+                                ref={textareaRef}
                                 value={values.password}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.password)}`}
@@ -110,6 +116,7 @@ export default function Register() {
                             <input
                                 type="password"
                                 name="rePass"
+                                ref={textareaRef}
                                 value={values.rePass}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.password || errors.missmatch)}`}

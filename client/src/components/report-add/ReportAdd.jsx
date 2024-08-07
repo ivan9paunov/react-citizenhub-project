@@ -54,6 +54,8 @@ export default function ReportAdd() {
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
 
+    const textareaRef = useClickOutside(() => setErrors(''));
+
     return (
         <div className="py-5">
             <div className="row bg-dark">
@@ -72,6 +74,7 @@ export default function ReportAdd() {
                                 <select
                                     name="topic"
                                     id="topic"
+                                    ref={textareaRef}
                                     value={values.topic}
                                     onChange={changeHandler}
                                     className={`form-control bg-white ${errors.topic ? 'border-danger-thick' : 'border-0'}`}
@@ -96,6 +99,7 @@ export default function ReportAdd() {
                                 <input
                                     type="text"
                                     name="title"
+                                    ref={textareaRef}
                                     value={values.title}
                                     onChange={changeHandler}
                                     className={`form-control bg-white ${errors.title ? 'border-danger-thick' : 'border-0'}`}
@@ -107,6 +111,7 @@ export default function ReportAdd() {
                                 <input
                                     type="text"
                                     name="location"
+                                    ref={textareaRef}
                                     value={values.location}
                                     onChange={changeHandler}
                                     className={`form-control bg-white ${errors.location ? 'border-danger-thick' : 'border-0'}`}
@@ -117,6 +122,7 @@ export default function ReportAdd() {
                             <div className="col-12">
                                 <textarea
                                     name="description"
+                                    ref={textareaRef}
                                     value={values.description}
                                     onChange={changeHandler}
                                     className={`form-control bg-white ${errors.description ? 'border-danger-thick' : 'border-0'}`}

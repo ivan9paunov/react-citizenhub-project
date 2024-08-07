@@ -14,6 +14,7 @@ import Like from "../likes/like/Like.jsx";
 import Dislike from "../likes/dislike/Dislike.jsx";
 import Spinner from "../spinner/Spinner.jsx";
 import CustomModal from "../customModal/CustomModal.jsx";
+import useClickOutside from "../../hooks/useClickOutside.js";
 
 const initialValues = {
     comment: ''
@@ -92,6 +93,8 @@ export default function ReportDetails() {
 
     const isOwner = userId == report._ownerId;
     const hasLiked = !!likes.find((l) => l._ownerId == userId);
+
+    const textareaRef = useClickOutside(() => setCommentError(''));
 
     return (
         <>
@@ -199,6 +202,7 @@ export default function ReportDetails() {
                                         <div className="col-12">
                                             <textarea
                                                 name="comment"
+                                                ref={textareaRef}
                                                 value={values.comment}
                                                 onChange={changeHandler}
                                                 className={`form-control bg-white ${commentError ? 'border-danger-thick' : 'border-0'}`}
