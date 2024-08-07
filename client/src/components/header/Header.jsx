@@ -3,7 +3,7 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
-    const { isAuthenticated } = useAuthContext();
+    const { isAuthenticated, username } = useAuthContext();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
 
@@ -59,7 +59,7 @@ export default function Header() {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div className="navbar-nav mr-auto py-0">
+                            <div className="navbar-nav mr-auto py-0 px-0">
                                 <Link to="/" className={`nav-item nav-link ${activeLink == '/' ? 'active' : ''}`}>Home</Link>
                                 <Link to="/reports" className={`nav-item nav-link ${activeLink.startsWith('/reports') ? 'active' : ''}`}>Reports</Link>
                                 <Link to="/archived" className={`nav-item nav-link ${activeLink.startsWith('/archived') ? 'active' : ''}`}>Archived</Link>
@@ -73,12 +73,18 @@ export default function Header() {
                                     : (
                                         <>
                                             <Link to="/login" className={`nav-item nav-link ${activeLink == '/login' ? 'active' : ''}`}>Login</Link>
-                                            <Link to="/register" className={`nav-item nav-link ${activeLink == '/register' ? 'active' : ''}`}>Register</Link>
+                                            <Link to="/register" className={`nav-item nav-link ${activeLink == '/register' ? 'active' : ''}`} style={{ marginRight: '0' }}>Register</Link>
                                         </>
                                     )
 
                                 }
                             </div>
+
+                            {/* // TODO: A profile page could be created. */}
+                            {isAuthenticated &&
+                                <span className="btn btn-light py-md-3 px-md-5 d-none d-lg-block">{`Hello, ${username}!`}</span>
+                            }
+
                             <Link to="https://hisarya.bg/" className="btn btn-primary py-md-3 px-md-5 d-none d-lg-block" target="_blank">Official Website</Link>
                         </div>
                     </nav>

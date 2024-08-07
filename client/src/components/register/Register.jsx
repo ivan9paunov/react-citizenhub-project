@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
+
 import { useRegister } from "../../hooks/useAuth.js";
 import { useForm } from "../../hooks/useForm.js";
 
@@ -13,6 +13,7 @@ export default function Register() {
 
     const emailPattern = /^[a-z][a-z0-9._-]*@[a-z]+\.[a-z]{2,4}(\.[a-z]{2,4})?$/;
     const usernamePattern = /^[a-z][a-z0-9._-]*$/;
+    const passwordPattern = /^\S{6,}$/;
 
     const registerHandler = async ({ username, email, password, rePass }) => {
         const newErrors = {};
@@ -25,17 +26,17 @@ export default function Register() {
 
         if (!email) {
             newErrors.email = 'Email is required';
-        } else if (!emailPattern.test(email.toLowerCase())) {
+        } else if (!emailPattern.test(email.trim().toLowerCase())) {
             newErrors.email = 'Invalid email format';
         }
 
         if (!password) {
             newErrors.password = 'Password is required';
-        } else if (password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
+        } else if (!passwordPattern.test(password.trim())) {
+            newErrors.password = 'Password must be at least 6 characters and contain no spaces';
         }
 
-        if (password.trim() !== rePass.trim()) {
+        if (password.trim() != rePass.trim()) {
             newErrors.missmatch = 'Passwords do not match';
         }
 
