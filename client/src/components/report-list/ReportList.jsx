@@ -5,14 +5,24 @@ import ReportListItem from "./report-list-item/ReportListItem.jsx";
 import Spinner from "../spinner/Spinner.jsx";
 import Pagination from "../pagination/Pagination.jsx";
 import { useGetAllReports } from "../../hooks/useReports.js";
+import { usePageValidate } from "../../hooks/usePageValidate.js";
 
 export default function ReportList() {
-    const navigate = useNavigate();
     const [filterValues, setFilterValues] = useState({
         order: 'newest',
         topic: 'all'
     });
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const page = Number(queryParams.get('page')) || 1;
 
+    const { reports, isLoading, totalPages } = useGetAllReports(filterValues, currentPage);
+
+    usePageValidate(page, totalPages, navigate, setCurrentPage, 'reports');
+    
     const changeHandler = (e) => {
         setFilterValues(oldValues => ({
             ...oldValues,
@@ -20,12 +30,6 @@ export default function ReportList() {
         }));
         navigate('/reports');
     };
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const page = Number(queryParams.get('page')) || 1;
-
-    const { reports, totalPages, isLoading } = useGetAllReports(filterValues, page);
 
     return (
         <div className="container-fluid p-5">
@@ -82,7 +86,10 @@ export default function ReportList() {
                         : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21", fontSize: "6rem" }}>No current issues</h3>
                 }
             </div>
-            <Pagination page={page} totalPages={totalPages} />
+            {reports.length && totalPages > 1
+                ? <Pagination page={page} totalPages={totalPages} />
+                : ''
+            }
         </div >
     );
 }

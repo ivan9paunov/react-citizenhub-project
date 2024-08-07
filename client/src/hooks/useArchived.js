@@ -3,17 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 import archivedAPI from "../api/archived-api.js";
 
-export function useGetAllArchived(filterValues) {
+export function useGetAllArchived(filterValues, page) {
     const [archived, setArchived] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
             try {
-                const result = await archivedAPI.getAll(filterValues);
+                const { archived, pages } = await archivedAPI.getAll(filterValues, page);
 
-                setArchived(result);
+                setArchived(archived);
+                setTotalPages(pages);
             } catch (err) {
                 if (err.code.toString().startsWith('4')) {
                     navigate('/404');
@@ -28,10 +30,11 @@ export function useGetAllArchived(filterValues) {
                 setIsLoading(false);
             }
         })();
-    }, [filterValues]);
+    }, [filterValues, page]);
 
     return {
         archived,
+        totalPages,
         isLoading
     }
 };

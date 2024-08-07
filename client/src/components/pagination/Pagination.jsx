@@ -19,8 +19,8 @@ export default function Pagination({
     const pageLinks = getPageRange(page, totalPages);
 
     const pageIndex = (index, page) => index == page
-        ? <Link to={`?page=${index}`} className="btn btn-primary custom-btn py-3 mx-1">{index}</Link>
-        : <Link to={`?page=${index}`} className="btn btn-secondary custom-btn py-3 mx-1">{index}</Link>;
+        ? <Link to={`?page=${index}`} key={index} className="btn btn-primary custom-btn py-3 mx-1">{index}</Link>
+        : <Link to={`?page=${index}`} key={index} className="btn btn-secondary custom-btn py-3 mx-1">{index}</Link>;
 
     return (
         <div className="row pt-5 justify-content-center">

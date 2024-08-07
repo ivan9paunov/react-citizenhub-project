@@ -1,23 +1,35 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useGetAllArchived } from "../../hooks/useArchived.js";
 import ArchiveListItem from "./archive-list-item/ArchiveListItem.jsx";
 import Spinner from "../spinner/Spinner.jsx";
+import Pagination from "../pagination/Pagination.jsx";
+import { useGetAllArchived } from "../../hooks/useArchived.js";
+import { usePageValidate } from "../../hooks/usePageValidate.js";
 
 export default function ArchiveList() {
     const [filterValues, setFilterValues] = useState({
         order: 'newest',
         topic: 'all'
     });
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const page = Number(queryParams.get('page')) || 1;
+
+    const { archived, isLoading, totalPages } = useGetAllArchived(filterValues, currentPage);
+    
+    usePageValidate(page, totalPages, navigate, setCurrentPage, 'archived');
 
     const changeHandler = (e) => {
         setFilterValues(oldValues => ({
             ...oldValues,
             [e.target.name]: e.target.value
         }));
+        navigate('/archived');
     };
-
-    const { archived, isLoading } = useGetAllArchived(filterValues);
 
     return (
         <div className="container-fluid p-5">
@@ -74,6 +86,10 @@ export default function ArchiveList() {
                         : <h3 className="display-3 text-uppercase text-center mb-0" style={{ color: "#FB5B21", fontSize: "6rem" }}>No issues resolved</h3>
                 }
             </div>
+            {archived.length && totalPages > 1
+                ? <Pagination page={page} totalPages={totalPages} />
+                : ''
+            }
         </div>
     );
 }

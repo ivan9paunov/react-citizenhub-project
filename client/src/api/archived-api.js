@@ -2,8 +2,9 @@ import * as request from './requester.js';
 
 const BASE_URL = 'http://localhost:3030/data/archived';
 
-const getAll = async (filterValues) => {
+const getAll = async (filterValues, page) => {
     let requestURL = BASE_URL;
+    const pageSize = 6;
 
     if (filterValues.order == 'newest') {
         requestURL += '?sortBy=_createdOn%20desc';
@@ -19,11 +20,18 @@ const getAll = async (filterValues) => {
         requestURL += `&${params.toString()}`;
     }
 
-    const result = await request.get(requestURL);
+    const totalPages = await request.get(`${requestURL}&count`);
+    const pages = Math.ceil(totalPages / pageSize);
 
+    requestURL += `&offset=${(page - 1) * pageSize}&pageSize=${pageSize}`;
+
+    const result = await request.get(requestURL);
     const archived = Object.values(result);
 
-    return archived;
+    return {
+        archived,
+        pages
+    }
 };
 
 const getOne = (archiveId) => request.get(`${BASE_URL}/${archiveId}`);
