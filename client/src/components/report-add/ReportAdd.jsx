@@ -72,6 +72,7 @@ export default function ReportAdd() {
                                 <select
                                     name="topic"
                                     id="topic"
+                                    value={values.topic}
                                     onChange={changeHandler}
                                     className={`form-control bg-white ${errors.topic ? 'border-danger-thick' : 'border-0'}`}
                                     style={{ height: "55px" }}

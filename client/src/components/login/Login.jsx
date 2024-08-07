@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm.js";
 import { useLogin } from "../../hooks/useAuth.js";
-import useClickOutside from "../../hooks/useClickOutside.js";
-
 
 const initialValues = { email: '', password: '' };
 
@@ -47,8 +45,6 @@ export default function Login() {
         </p>
     );
 
-    const textareaRef = useClickOutside(() => setErrors(''));
-
     return (
         <div className="py-5">
             <div className="bg-dark rounded p-5 mx-auto my-200px" style={{ width: "500px" }}>
@@ -60,7 +56,6 @@ export default function Login() {
                             <input
                                 type="email"
                                 name="email"
-                                ref={textareaRef}
                                 value={values.email}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.email)}`}
@@ -73,7 +68,6 @@ export default function Login() {
                             <input
                                 type="password"
                                 name="password"
-                                ref={textareaRef}
                                 value={values.password}
                                 onChange={changeHandler}
                                 className={`form-control bg-white ${errorBorder(errors.password)}`}
