@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
-export default function ReportListItem({
+export default function ProfileReportListItem({
     _id,
     title,
     location,
-    topic
+    topic,
+    collection
 }) {
     return (
         <div className="col-lg-4 col-md-6">
@@ -13,7 +14,7 @@ export default function ReportListItem({
                     <img className="img-fluid w-100" src={`/${topic}`} alt="" />
                     <div className="team-overlay">
                         <div className="d-flex align-items-center justify-content-start">
-                            <Link className="btn btn-light mx-1" to={`/reports/${_id}/details`}>Details</Link>
+                            <Link className="btn btn-light mx-1" to={`/${collection}/${_id}/details`}>Details</Link>
                         </div>
                     </div>
                 </div>

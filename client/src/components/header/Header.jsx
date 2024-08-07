@@ -82,7 +82,7 @@ export default function Header() {
 
                             {/* // TODO: A profile page could be created. */}
                             {isAuthenticated &&
-                                <span className="btn btn-light py-md-3 px-md-5 d-none d-lg-block">{`Hello, ${username}!`}</span>
+                                <Link to="/profile/reports" className="btn btn-light py-md-3 px-md-5 d-none d-lg-block">{`Hello, ${username}!`}</Link>
                             }
 
                             <Link to="https://hisarya.bg/" className="btn btn-primary py-md-3 px-md-5 d-none d-lg-block" target="_blank">Official Website</Link>

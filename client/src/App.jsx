@@ -22,6 +22,7 @@ import UserGuard from "./common/UserGuard.jsx";
 import UnauthorizedGuard from "./common/UnauthorizedGuard.jsx";
 import PageNotFound from "./components/page-not-found/PageNotFound.jsx";
 import PageServerError from "./components/page-server-error/PageServerError.jsx";
+import MyProfile from "./components/my-profile/MyProfile.jsx";
 
 function App() {
     return (
@@ -41,6 +42,8 @@ function App() {
                         <Route element={<GuestGuard />}>
                             <Route path="/report-it" element={<ReportAdd />} />
                             <Route path="/logout" element={<Logout />} />
+                            <Route path="/profile/reports" element={<MyProfile />} />
+                            <Route path="/profile/archived" element={<MyProfile />} />
                         </Route>
                         <Route element={<UserGuard />}>
                             <Route path="/login" element={<Login />} />
