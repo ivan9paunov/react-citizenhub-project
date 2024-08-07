@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function ReportEdit() {
     const navigate = useNavigate();
     const { reportId } = useParams();
-    const [report] = useGetOneReport(reportId);
+    const { report } = useGetOneReport(reportId);
     const [errors, setErrors] = useState({});
 
     const {

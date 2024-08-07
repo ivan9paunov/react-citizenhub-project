@@ -47,6 +47,7 @@ export function useGetOneArchive(reportId) {
         description: ''
     });
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
@@ -64,12 +65,15 @@ export function useGetOneArchive(reportId) {
                     navigate('/server-error');
                     throw new Error(err.message);
                 }
+            } finally {
+                setIsLoading(false);
             }
         })();
     }, [reportId]);
 
-    return [
+    return {
         archive,
-        setArchive
-    ];
+        setArchive,
+        isLoading
+    };
 };

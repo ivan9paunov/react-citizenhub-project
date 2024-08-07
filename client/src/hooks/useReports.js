@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import reportsAPI from "../api/reports-api.js";
-import { useNavigate } from "react-router-dom";
 
 export function useGetAllReports(filterValues, page) {
     const [reports, setReports] = useState([]);
@@ -47,6 +47,7 @@ export function useGetOneReport(reportId) {
         description: ''
     });
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
@@ -64,14 +65,17 @@ export function useGetOneReport(reportId) {
                     navigate('/server-error');
                     throw new Error(err.message);
                 }
+            } finally {
+                setIsLoading(false);
             }
         })();
     }, [reportId]);
 
-    return [
+    return {
         report,
-        setReport
-    ];
+        setReport,
+        isLoading
+    };
 };
 
 export function useCreateReport() {

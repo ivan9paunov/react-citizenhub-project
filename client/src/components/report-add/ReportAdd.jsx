@@ -78,10 +78,10 @@ export default function ReportAdd() {
                                     style={{ height: "55px" }}
                                 >
                                     <option value="img/colonada.jpg" disabled>Select Topic:</option>
-                                    <option value="img/flooding-road.jpg">Blocked Stormwater Drain</option>
+                                    <option value="img/flooding-road.jfif">Blocked Stormwater Drain</option>
                                     <option value="img/childrens-playground.jpg">Children's Playground Repair</option>
                                     <option value="img/fallen-tree.jpg">Fallen Tree</option>
-                                    <option value="img/illegal-dumping.jpg">Illegal Dumping</option>
+                                    <option value="img/illegal-dumping.JPG">Illegal Dumping</option>
                                     <option value="img/no-parking.png">Improper Parking</option>
                                     <option value="img/public-bin.jpeg">Litter Bins Maintenance and Garbage Collect</option>
                                     <option value="img/lost-belongings.jpg">Lost Belongings</option>
