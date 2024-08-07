@@ -1,27 +1,38 @@
-import { Navigate, Outlet } from "react-router-dom";
-import reportsAPI from "../api/reports-api.js";
-import { useAuthContext } from "../contexts/AuthContext.jsx";
+import { useState, useEffect } from 'react';
+import { Navigate, Outlet, useParams } from 'react-router-dom';
+import reportsAPI from '../api/reports-api.js';
+import { useAuthContext } from '../contexts/AuthContext.jsx';
+import Spinner from '../components/spinner/Spinner.jsx';
 
-export default async function UnauthorizedGuard() {
+export default function UnauthorizedGuard() {
     const { userId } = useAuthContext();
-
-    if (!userId) {
-        <Navigate to={'/'} />
-    }
-
     const { reportId } = useParams();
+    const [isOwner, setIsOwner] = useState(null);
 
-    let isOwner = false;
+    useEffect(() => {
+        const checkOwnership = async () => {
+            if (!userId) {
+                setIsOwner(false);
+                return;
+            }
 
-    const report = await reportsAPI.getOne(reportId);
-    console.log(report);
-    
-    if (report) {
-        isOwner = reportId == userId;
+            try {
+                const report = await reportsAPI.getOne(reportId);
+                setIsOwner(report && report._ownerId === userId);
+            } catch (error) {
+                console.error('Error fetching report:', error);
+                setIsOwner(false);
+            }
+        };
+
+        checkOwnership();
+    }, [userId, reportId]);
+
+    if (isOwner === null) {
+        return <Spinner />;
     }
-    console.log(isOwner);
-    
+
     return isOwner
         ? <Outlet />
-        : <Navigate to={`/reports/${reportId}/details`} />
+        : <Navigate to={`/reports/${reportId}/details`} />;
 }
