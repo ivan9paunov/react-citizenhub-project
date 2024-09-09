@@ -14,6 +14,7 @@ import Like from "../likes/like/Like.jsx";
 import Dislike from "../likes/dislike/Dislike.jsx";
 import Spinner from "../spinner/Spinner.jsx";
 import CustomModal from "../customModal/CustomModal.jsx";
+import useRemoveBorder from "../../hooks/useRemoveErrorBorder.js";
 
 const initialValues = {
     comment: ''
@@ -92,6 +93,8 @@ export default function ReportDetails() {
 
     const isOwner = userId == report._ownerId;
     const hasLiked = !!likes.find((l) => l._ownerId == userId);
+
+    const textareaRef = useRemoveBorder(() => setCommentError(''));
 
     return (
         <>
@@ -201,6 +204,7 @@ export default function ReportDetails() {
                                                 name="comment"
                                                 value={values.comment}
                                                 onChange={changeHandler}
+                                                ref={textareaRef}
                                                 className={`form-control bg-white ${commentError ? 'border-danger-thick' : 'border-0'}`}
                                                 rows="5"
                                                 placeholder="Comment"
